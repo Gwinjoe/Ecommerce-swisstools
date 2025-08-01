@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWISSTools - View Category</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+
+  <!-- GSAP -->
+  <script type="importmap">
+    {
+      "imports": {
+        "gsap": "https://cdn.skypack.dev/gsap",
+        "gsap/ScrollTrigger": "https://cdn.skypack.dev/gsap/ScrollTrigger"
+      }
+    }
+    </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="../assets/css/manage_view_category.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/admin">SWISS<span class="highlight">Tools</span></a>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars menu-icon"></i>
+      </div>
+      <div class="header-extras">
+        <div class="theme-toggle">
+          <button type="button" class="theme-toggle-btn" title="Toggle Theme" data-ga-event="theme_toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <div class="language-selector">
+          <button type="button" class="language-toggle" title="Select Language" data-ga-event="language_toggle">
+            <i class="fas fa-globe"></i>
+          </button>
+          <ul class="language-options">
+            <li data-lang="en" data-ga-event="select_language" data-ga-value="en">English</li>
+            <li data-lang="es" data-ga-event="select_language" data-ga-value="es">Español</li>
+            <li data-lang="fr" data-ga-event="select_language" data-ga-value="fr">Français</li>
+          </ul>
+        </div>
+        <div class="notification">
+          <button type="button" class="notification-btn" title="Notifications" data-ga-event="notification_open">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">2</span>
+          </button>
+        </div>
+        <div class="user-profile">
+          <img src="assets/images/team1.jpeg" alt="Admin Profile" class="profile-img">
+          <div class="profile-info">
+            <span class="profile-name">Admin User</span>
+            <span class="profile-status">Active</span>
+          </div>
+          <ul class="profile-dropdown">
+            <li><a href="/admin" data-ga-event="profile_nav" data-ga-value="dashboard"><i
+                  class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/admin/manage_users" data-ga-event="profile_nav" data-ga-value="manage_users"><i
+                  class="fas fa-users"></i> Manage Users</a></li>
+            <li><a href="/admin/categories" data-ga-event="profile_nav" data-ga-value="categories"><i
+                  class="fas fa-tags"></i> Categories</a></li>
+            <li><a href="/admin/logout" data-ga-event="profile_nav" data-ga-value="logout"><i
+                  class="fas fa-sign-out-alt"></i> Logout</a></li>
+          </ul>
+        </div>
+        <div class="settings">
+          <button type="button" class="settings-btn" title="Settings" data-ga-event="settings_open">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+    <section class="admin-content">
+      <h1 class="section-title"><i class="fas fa-tags"></i> Category Details</h1>
+      <div class="category-details">
+        <div class="detail-group">
+          <label>ID:</label>
+          <p class="category-id"></p>
+        </div>
+        <div class="detail-group">
+          <label>Name:</label>
+          <p class="category-name"></p>
+        </div>
+        <div class="detail-group">
+          <label>Description:</label>
+          <p class="category-description"></p>
+        </div>
+        <div class="form-actions">
+          <a href="/admin/categories" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Categories</a>
+          <a href="/admin/edit_category?id=" class="edit-btn"><i class="fas fa-edit"></i> Edit Category</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column animate-fade">
+        <h3 class="footer-logo">LO<span class="highlight">GO</span></h3>
+        <p>Your trusted partner in engineering & construction tools.</p>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i> 123 Builder Lane, Lagos, Nigeria</p>
+          <p><i class="fas fa-phone-alt"></i> +234 812 345 6789</p>
+          <p><i class="fas fa-envelope"></i> support@example.com</p>
+        </div>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/admin/add_product" data-ga-event="footer_nav" data-ga-value="add_product">Add Product</a>
+          </li>
+          <li><a href="/admin/view_orders" data-ga-event="footer_nav" data-ga-value="view_orders">View Orders</a>
+          </li>
+          <li><a href="/admin/manage_users" data-ga-event="footer_nav" data-ga-value="manage_users">Manage
+              Users</a></li>
+          <li><a href="/admin/categories" data-ga-event="footer_nav" data-ga-value="categories">Categories</a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to get updates & offers.</p>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="button" data-ga-event="newsletter_subscribe">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="facebook"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="instagram"><i
+              class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="twitter"><i
+              class="fab fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="linkedin"><i
+              class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span class="year"></span> SWISSTools. All rights reserved.</p>
+    </div>
+    <button type="button" class="scroll-top-btn" title="Go to top" data-ga-event="scroll_top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </footer>
+
+  <!-- JS -->
+  <script type="module" src="../assets/js/manage_view_category.js"></script>
+</body>
+
+</html>

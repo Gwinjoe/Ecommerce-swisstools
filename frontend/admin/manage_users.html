@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWISSTools - Manage Users</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "gsap": "https://cdn.skypack.dev/gsap",
+        "gsap/ScrollTrigger": "https://cdn.skypack.dev/gsap/ScrollTrigger"
+      }
+    }
+    </script>
+  <link rel="stylesheet" href="../assets/css/manage_users.css" />
+</head>
+
+<body>
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/admin" aria-label="Logo">SWISS<span class="highlight">Tools</span></a>
+      </div>
+      <div class="menu-toggle" aria-label="Toggle Menu">
+        <i class="fas fa-bars menu-icon"></i>
+      </div>
+      <div class="header-extras">
+        <div class="theme-toggle">
+          <button type="button" class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme"
+            data-ga-event="theme_toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <div class="language-selector">
+          <button type="button" class="language-toggle" title="Select Language" aria-label="Select Language"
+            data-ga-event="language_toggle">
+            <i class="fas fa-globe"></i>
+          </button>
+          <ul class="language-options">
+            <li data-lang="en" data-ga-event="select_language" data-ga-value="en">English</li>
+            <li data-lang="es" data-ga-event="select_language" data-ga-value="es">Español</li>
+            <li data-lang="fr" data-ga-event="select_language" data-ga-value="fr">Français</li>
+          </ul>
+        </div>
+        <div class="notification">
+          <button type="button" class="notification-btn" title="Notifications" aria-label="Notifications"
+            data-ga-event="notification_open">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">2</span>
+          </button>
+        </div>
+        <div class="user-profile">
+          <img src="../assets/images/team1.jpeg" alt="Admin Profile" class="profile-img">
+          <div class="profile-info">
+            <span class="profile-name">Admin User</span>
+            <span class="profile-status">Active</span>
+          </div>
+          <ul class="profile-dropdown">
+            <li><a href="/admin" data-ga-event="profile_nav" data-ga-value="dashboard"><i
+                  class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/admin/manage_users" data-ga-event="profile_nav" data-ga-value="manage_users"><i
+                  class="fas fa-users"></i> Manage Users</a></li>
+            <li><a href="/admin/categories" data-ga-event="profile_nav" data-ga-value="categories"><i
+                  class="fas fa-tags"></i> Categories</a></li>
+            <li><a href="/admin/logout" data-ga-event="profile_nav" data-ga-value="logout"><i
+                  class="fas fa-sign-out-alt"></i>
+                Logout</a></li>
+          </ul>
+        </div>
+        <div class="settings">
+          <button type="button" class="settings-btn" title="Settings" aria-label="Settings"
+            data-ga-event="settings_open">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="admin-main">
+    <section class="admin-content">
+      <div class="user-actions">
+        <input type="text" id="searchInput" placeholder="Search by name or email..." aria-label="Search Users" />
+        <select id="sortSelect" aria-label="Sort Users">
+          <option value="default">Sort by</option>
+          <option value="name">Name (A-Z)</option>
+          <option value="email">Email (A-Z)</option>
+        </select>
+        <button class="add-user-btn" onclick="openModal('add')" aria-label="Add User"><i class="fas fa-user-plus"></i>
+          Add User</button>
+      </div>
+      <div class="table-container">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Admin</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <div id="userModal" class="modal">
+    <div class="modal-content" id="modalContent">
+      <span class="close-modal" onclick="closeModal()" aria-label="Close Modal"><i
+          class="fas fa-times-circle"></i></span>
+      <h2 id="modalTitle"><i class="fas fa-user"></i> User Details</h2>
+      <div id="userForm">
+        <input type="hidden" id="userId" />
+        <div class="form-group">
+          <label for="userName">Name:</label>
+          <input type="text" id="userName" required />
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Email:</label>
+          <input type="email" id="userEmail" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
+        </div>
+        <div class="form-group">
+          <label for="admin">Role:</label>
+          <select id="admin">
+            <option value="true">Admin</option>
+            <option value="false">User</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="save-user" onclick="saveUser()">Save</button>
+          <button type="button" class="close-modal" onclick="closeModal()" aria-label="Close Modal"><i
+              class="fas fa-times-circle"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column animate-fade">
+        <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+        <p>Your trusted partner in engineering & construction tools.</p>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i> 5 Cherubim Road, Mile 3 Market, Port Harcourt</p>
+          <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+          <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
+        </div>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/admin/add_product" data-ga-event="footer_nav" data-ga-value="add_product">Add Product</a></li>
+          <li><a href="/admin/view_orders" data-ga-event="footer_nav" data-ga-value="view_orders">View Orders</a></li>
+          <li><a href="/admin/manage_users" data-ga-event="footer_nav" data-ga-value="manage_users">Manage Users</a>
+          </li>
+          <li><a href="/admin/categories" data-ga-event="footer_nav" data-ga-value="categories">Categories</a></li>
+        </ul>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to get updates & offers.</p>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="Enter your email" aria-label="Newsletter Email" required>
+          <button type="button" data-ga-event="newsletter_subscribe" aria-label="Subscribe to Newsletter"><i
+              class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="facebook" aria-label="Facebook"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="instagram"
+            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="twitter" aria-label="Twitter"><i
+              class="fab fa-x-twitter"></i></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="linkedin" aria-label="LinkedIn"><i
+              class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span class="year"></span> SWISSTools. All rights reserved.</p>
+    </div>
+    <button type="button" class="scroll-top-btn" title="Go to top" aria-label="Scroll to Top"
+      data-ga-event="scroll_top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </footer>
+  <script type="module" src="../assets/js/manage_user.js"></script>
+</body>
+
+</html>

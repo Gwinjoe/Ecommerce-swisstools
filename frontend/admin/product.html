@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - SWISSTools</title>
+    <link rel="stylesheet" href="../assets/css/manage_products.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+  <body>
+    <div class="products-container">
+      <div class="products-card">
+        <div class="logo">
+          <a href="/admin">SWISS<span class="highlight">Tools</span></a>
+        </div>
+        <h1>Manage Products</h1>
+        <div class="products-controls">
+          <div class="control-group">
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Search by product name" data-ga-event="search_products">
+          </div>
+          <div class="control-group">
+            <label for="sort">Sort by:</label>
+            <select id="sort" data-ga-event="sort_products">
+              <option value="name-asc">Name (A-Z)</option>
+              <option value="name-desc">Name (Z-A)</option>
+              <option value="price-asc">Price (Low to High)</option>
+              <option value="price-desc">Price (High to Low)</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="filter">Filter by Category:</label>
+            <select id="filter" data-ga-event="filter_products">
+              <option value="">All Categories</option>
+            </select>
+          </div>
+          <div class="bulk-actions" style="display: none;">
+            <div class="control-group">
+              <label for="bulk-category">Assign Category:</label>
+              <select id="bulk-category" data-ga-event="bulk_category_select">
+                <option value="">Select Category</option>
+              </select>
+              <button type="button" class="bulk-action-btn assign-category-btn" data-ga-event="bulk_assign_category" disabled>Assign</button>
+            </div>
+            <button type="button" class="bulk-action-btn delete-selected-btn" data-ga-event="bulk_delete_products" disabled>Delete Selected</button>
+          </div>
+          <button type="button" class="add-product-btn" data-ga-event="add_product_nav">Add New Product</button>
+        </div>
+        <div class="products-table">
+          <table>
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all" data-ga-event="select_all_products"></th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price ($)</th>
+                <th>Stock</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="product-list"></tbody>
+          </table>
+          <div class="no-products">No products found</div>
+        </div>
+        <div class="pagination">
+          <button type="button" id="first-page" data-ga-event="pagination_first">First</button>
+          <button type="button" id="prev-page" data-ga-event="pagination_prev">Prev</button>
+          <span id="page-info"></span>
+          <button type="button" id="next-page" data-ga-event="pagination_next">Next</button>
+          <button type="button" id="last-page" data-ga-event="pagination_last">Last</button>
+        </div>
+      </div>
+    </div>
+    <!-- GSAP -->
+    <script type="importmap">
+      {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
+    </script>
+    <script type="module" src="../assets/js/manage_products.js"></script>
+  </body>
+</html>

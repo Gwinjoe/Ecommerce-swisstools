@@ -1,0 +1,343 @@
+:root {
+    --primary-color: #f28c28;
+    --highlight-color: #f28c28;
+    --background-color: #f9f9f9;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --headline-color: #1e1e2f;
+    --text-color: #333;
+    --border-glow: rgb(255, 197, 4);
+    --headline-font: 'Montserrat', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+    --border-radius: 4px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: linear-gradient(to bottom, var(--background-color) 0%, #f38c38 100%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.order-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.order-details-card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 10px var(--border-glow);
+    padding: 25px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+}
+
+.logo a {
+    font-family: var(--headline-font);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--headline-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: var(--highlight-color);
+}
+
+h1 {
+    font-family: var(--headline-font);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--headline-color);
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: var(--headline-font);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--headline-color);
+    margin: 20px 0 15px;
+}
+
+.order-info,
+.customer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.order-info div,
+.customer-details div {
+    font-size: 0.9rem;
+}
+
+.order-info strong,
+.customer-details strong {
+    font-weight: 600;
+    color: var(--headline-color);
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background-color: #ffa500;
+    color: #fff;
+}
+
+.status-shipped {
+    background-color: #5e60ce;
+    color: #fff;
+}
+
+.status-delivered {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+.status-cancelled {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.status-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.status-control label {
+    font-family: var(--headline-font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--headline-color);
+}
+
+.status-control select {
+    padding: 6px;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.status-control select:focus {
+    box-shadow: 0 0 8px var(--border-glow);
+    outline: none;
+}
+
+.update-status-btn,
+.back-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 8px 15px;
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.update-status-btn:hover,
+.back-btn:hover {
+    background-color: #ad5700;
+    transform: translateY(-2px);
+}
+
+.items-table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    display: table;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+th {
+    font-family: var(--headline-font);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--headline-color);
+}
+
+tr:hover {
+    background: rgba(94, 96, 206, 0.1);
+    transition: background 0.2s ease;
+}
+
+td {
+    font-size: 0.9rem;
+}
+
+.no-items {
+    display: none;
+    font-size: 0.9rem;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.no-items.active {
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-details-card {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .logo a {
+        font-size: 2rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    .order-info div,
+    .customer-details div {
+        font-size: 0.85rem;
+    }
+
+    .status-control {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .status-control select,
+    .status-control .update-status-btn,
+    .back-btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        width: 100%;
+    }
+
+    table {
+        display: none;
+    }
+
+    .items-table {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .item-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-shadow: 0 0 5px var(--border-glow);
+    }
+
+    .item-card div {
+        font-size: 0.85rem;
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #1e1e2f;
+    --card-bg: rgba(30, 30, 47, 0.8);
+    --headline-color: #f5f5f5;
+    --text-color: #ccc;
+}
+
+body.dark-mode {
+    background: linear-gradient(to bottom, var(--background-color) 0%, #f0b803 100%);
+}
+
+body.dark-mode .order-details-card,
+body.dark-mode .item-card {
+    background-color: var(--card-bg);
+}
+
+body.dark-mode .logo a,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode .order-info strong,
+body.dark-mode .customer-details strong,
+body.dark-mode .status-control label,
+body.dark-mode th {
+    color: var(--headline-color);
+}
+
+body.dark-mode .order-info div,
+body.dark-mode .customer-details div,
+body.dark-mode td {
+    color: var(--text-color);
+}
+
+body.dark-mode .status-control select {
+    background-color: #3a3a5a;
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+body.dark-mode .status-control select:focus {
+    box-shadow: 0 0 8px var(--border-glow);
+}
+
+body.dark-mode .update-status-btn,
+body.dark-mode .back-btn {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .update-status-btn:hover,
+body.dark-mode .back-btn:hover {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border-color: #4a4a6a;
+}

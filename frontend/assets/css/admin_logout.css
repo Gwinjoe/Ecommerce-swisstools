@@ -1,0 +1,186 @@
+:root {
+    --primary-color: #f28c28;
+    --secondary-color: #f2f2f2;
+    --background-color: #e5e5e5;
+    --headline-color: #1c1c1c;
+    --text-color: #333;
+    --headline-font: 'Montserrat', sans-serif;
+    --body-font: 'Open Sans', sans-serif;
+    --border-radius: 20px;
+    --card-bg: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    background: linear-gradient(135deg, var(--background-color) 0%, #f2b279 100%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.logout-card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 400px;
+    width: 500px;
+    text-align: center;
+}
+
+.logo a {
+    font-family: var(--headline-font);
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--headline-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+h1 {
+    font-family: var(--headline-font);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--headline-color);
+    margin-bottom: 20px;
+}
+
+.logout-message {
+    font-family: var(--body-font);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.logout-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.confirm-btn,
+.cancel-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--body-font);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.confirm-btn {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.confirm-btn:hover {
+    background-color: #d47518;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: var(--text-color);
+}
+
+.cancel-btn:hover {
+    background-color: #b3b3b3;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .logout-card {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .logo a {
+        font-size: 1.75rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .logout-message {
+        font-size: 0.9rem;
+    }
+
+    .confirm-btn,
+    .cancel-btn {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #1a1a1a;
+    --text-color: #ccc;
+    --headline-color: #fff;
+    --card-bg: rgba(51, 51, 51, 0.1);
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, var(--background-color) 0%, #d47518 100%);
+}
+
+body.dark-mode .logout-card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-mode h1,
+body.dark-mode .logout-message {
+    color: #fff;
+}
+
+body.dark-mode .confirm-btn {
+    background-color: var(--primary-color);
+}
+
+body.dark-mode .confirm-btn:hover {
+    background-color: #d47518;
+}
+
+body.dark-mode .cancel-btn {
+    background-color: #555;
+    color: #ccc;
+}
+
+body.dark-mode .cancel-btn:hover {
+    background-color: #666;
+}

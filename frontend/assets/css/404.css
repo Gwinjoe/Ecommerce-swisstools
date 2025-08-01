@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+}
+
+.error-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.error-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: #e74c3c;
+    /* Red for emphasis */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #444444;
+}
+
+.error-submessage {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #686868;
+    margin-bottom: 20px;
+}
+
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2c3e50;
+    /* Dark blue */
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #34495e;
+    transform: scale(1.05);
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #e74c3c;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .error-container {
+        padding: 10px;
+    }
+
+    .error-title {
+        font-size: 4rem;
+    }
+
+    .error-message {
+        font-size: 1.2rem;
+    }
+
+    .error-submessage {
+        font-size: 0.9rem;
+    }
+
+    .social-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}

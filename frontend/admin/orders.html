@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - SWISSTools</title>
+    <link rel="stylesheet" href="../assets/css/manage_orders.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+  <body>
+    <div class="orders-container">
+      <div class="orders-card">
+        <div class="logo">
+          <a href="/admin">SWISS<span class="highlight">Tools</span></a>
+        </div>
+        <h1>Manage Orders</h1>
+        <div class="orders-controls">
+          <div class="control-group">
+            <label for="search">Search:</label>
+            <input type="text" id="search" placeholder="Search by Order ID or Customer" data-ga-event="search_orders">
+          </div>
+          <div class="control-group">
+            <label for="sort">Sort by:</label>
+            <select id="sort" data-ga-event="sort_orders">
+              <option value="date-desc">Date (Newest)</option>
+              <option value="date-asc">Date (Oldest)</option>
+              <option value="amount-asc">Amount (Low to High)</option>
+              <option value="amount-desc">Amount (High to Low)</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="filter">Filter by Status:</label>
+            <select id="filter" data-ga-event="filter_orders">
+              <option value="">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div class="control-group date-range">
+            <label for="start-date">Date Range:</label>
+            <input type="date" id="start-date" data-ga-event="filter_date_range">
+            <span>to</span>
+            <input type="date" id="end-date" data-ga-event="filter_date_range">
+          </div>
+          <div class="control-group">
+            <button type="button" class="export-btn" data-ga-event="export_csv">Export to CSV</button>
+          </div>
+          <div class="bulk-actions" style="display: none;">
+            <div class="control-group">
+              <label for="bulk-status">Update Status:</label>
+              <select id="bulk-status" data-ga-event="bulk_status_select">
+                <option value="">Select Status</option>
+                <option value="pending">Pending</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button type="button" class="bulk-action-btn update-status-btn" data-ga-event="bulk_update_status" disabled>Update</button>
+            </div>
+          </div>
+        </div>
+        <div class="orders-table">
+          <table>
+            <thead>
+              <tr>
+                <th><input type="checkbox" id="select-all" data-ga-event="select_all_orders"></th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Amount ($)</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="order-list"></tbody>
+          </table>
+          <div class="no-orders">No orders found</div>
+        </div>
+        <div class="pagination">
+          <button type="button" id="first-page" data-ga-event="pagination_first">First</button>
+          <button type="button" id="prev-page" data-ga-event="pagination_prev">Prev</button>
+          <span id="page-info"></span>
+          <button type="button" id="next-page" data-ga-event="pagination_next">Next</button>
+          <button type="button" id="last-page" data-ga-event="pagination_last">Last</button>
+        </div>
+      </div>
+    </div>
+    <!-- GSAP -->
+    <script type="importmap">
+      {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
+    </script>
+    <script type="module" src="../assets/js/manage_orders.js"></script>
+  </body>
+</html>

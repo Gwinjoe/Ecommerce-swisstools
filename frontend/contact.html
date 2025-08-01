@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - SWISSTools</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+
+    <!-- Importmap for GSAP -->
+    <script type="importmap">
+        {
+            "imports": {
+                "gsap": "https://cdn.skypack.dev/gsap",
+                "gsap/ScrollTrigger": "https://cdn.skypack.dev/gsap/ScrollTrigger"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header (Included from your existing code) -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo-flex">
+                <div class="logo animate-logo">
+                    <a href="index.html">SWISS<span class="highlight">Tools</span></a>
+                </div>
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list" id="nav-menu">
+                    <li class="nav-item"><a href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a href="about.html">About Us</a></li>
+                    <li class="nav-item"><a href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a href="faq.html">FAQs/Help</a></li>
+                </ul>
+            </nav>
+            <div class="header-extras">
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select name="language" id="language">
+                        <option value="en">En</option>
+                        <option value="es">Sp</option>
+                        <option value="fr">Fr</option>
+                    </select>
+                </div>
+                <div class="auth-links">
+                    <i class="fas fa-user"></i>
+                    <a href="login.html">Login</a>
+                    <span class="separator">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+                <div class="cart">
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i>
+                        <span class="cart-text">Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Ken Burns Effect -->
+    <section class="hero-section">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+            <h1 class="animate-fade">Contact Us</h1>
+            <p class="animate-fade">We're here to help with all your engineering tool needs. Reach out today!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form animate-fade">
+                    <h2><i class="fas fa-envelope"></i> Send Us a Message</h2>
+                    <div class="form-container">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Subject" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info animate-fade">
+                    <h2><i class="fas fa-info-circle"></i> Get in Touch</h2>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p>+234 913 232 8654</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>support@swisstools.store</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Mon - Sat: 8 AM - 6 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section animate-fade">
+        <div class="container">
+            <h2><i class="fas fa-map"></i> Find Us</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31806.918348387182!2d6.970524413533745!3d4.7932459903618305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1069cea2e232ecd9%3A0xf9d0bae8bcfc60f0!2sDiobu%2C%20Port%20Harcourt%20500101%2C%20Rivers!5e0!3m2!1sen!2sng!4v1752766548931!5m2!1sen!2sng"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Included from your existing code) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column animate-fade">
+                <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+                <p>Your trusted partner in engineering &amp; construction tools.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> 5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
+                    <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+                    <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
+                </div>
+            </div>
+            <div class="footer-column animate-fade">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.html">Categories</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column animate-fade">
+                <h4>Information</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="return-policy.html">Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column animate-fade">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to get updates and offers.</p>
+                <div class="footer-newsletter">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">
+                        <span class="visually-hidden">Subscribe</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i><span class="visually-hidden">Facebook</span></a>
+                    <a href="#"><i class="fab fa-instagram"></i><span class="visually-hidden">Instagram</span></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i><span class="visually-hidden">Twitter</span></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i><span class="visually-hidden">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="year"></span> SWISSTools. All rights reserved.</p>
+        </div>
+        <button id="scrollTopBtn" title="Go to top" type="button">
+            <span class="visually-hidden">Scroll to top</span>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "swisstools",
+  "version": "1.0.0",
+  "description": "An Ecommerce website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Macpherson3903/E-commerce-frontend.git"
+  },
+  "author": "Macpherson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Macpherson3903/E-commerce-frontend/issues"
+  },
+  "homepage": "https://github.com/Macpherson3903/E-commerce-frontend#readme",
+  "dependencies": {
+    "@capacitor/app": "7.0.1",
+    "@capacitor/cli": "7.4.2",
+    "@capacitor/core": "7.4.2",
+    "@capacitor/haptics": "7.0.1",
+    "@capacitor/keyboard": "7.0.1",
+    "@capacitor/status-bar": "7.0.1"
+  }
+}

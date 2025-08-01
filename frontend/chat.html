@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Chat - SWISSTools</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+
+    <!-- GSAP -->
+    <script type="importmap">
+    {
+      "imports": {
+        "gsap": "https://cdn.skypack.dev/gsap",
+        "gsap/ScrollTrigger": "https://cdn.skypack.dev/gsap/ScrollTrigger"
+      }
+    }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/chat.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.php">SWISS<span class="highlight">Tools</span></a>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars menu-icon"></i>
+            </div>
+            <div class="header-extras">
+                <div class="theme-toggle">
+                    <button type="button" class="theme-toggle-btn" title="Toggle Theme" data-ga-event="theme_toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="language-selector">
+                    <button type="button" class="language-toggle" title="Select Language"
+                        data-ga-event="language_toggle">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                    <ul class="language-options">
+                        <li data-lang="en" data-ga-event="select_language" data-ga-value="en">En</li>
+                        <li data-lang="es" data-ga-event="select_language" data-ga-value="es">Esp</li>
+                        <li data-lang="fr" data-ga-event="select_language" data-ga-value="fr">Fr</li>
+                    </ul>
+                </div>
+                <div class="notification">
+                    <button type="button" class="notification-btn" title="Notifications"
+                        data-ga-event="notification_open">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">2</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <img src="assets/images/team1.jpeg" alt="User Profile" class="profile-img">
+                    <div class="profile-info">
+                        <span class="profile-name">User</span>
+                        <span class="profile-status">Active</span>
+                    </div>
+                    <ul class="profile-dropdown">
+                        <li><a href="users/dashboard.php" data-ga-event="profile_nav" data-ga-value="dashboard"><i
+                                    class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="users/orders.php" data-ga-event="profile_nav" data-ga-value="orders"><i
+                                    class="fas fa-shopping-cart"></i> Orders</a></li>
+                        <li><a href="users/profile.php" data-ga-event="profile_nav" data-ga-value="profile"><i
+                                    class="fas fa-user"></i> Profile</a></li>
+                        <li><a href="users/logout.php" data-ga-event="profile_nav" data-ga-value="logout"><i
+                                    class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                <div class="settings">
+                    <button type="button" class="settings-btn" title="Settings" data-ga-event="settings_open">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="chat-main">
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <aside class="chat-sidebar">
+                <div class="sidebar-header">
+                    <h2>Chats</h2>
+                    <button class="new-chat-btn" title="Start New Chat" data-ga-event="new_chat">
+                        <i class="fas fa-plus-circle"></i> New Chat
+                    </button>
+                </div>
+                <div class="chat-search">
+                    <input type="text" placeholder="Search chats..." class="search-input" />
+                </div>
+                <div class="chat-list">
+                    <!-- Chat threads injected here -->
+                </div>
+            </aside>
+
+            <!-- Chat Window -->
+            <section class="chat-window">
+                <div class="chat-header">
+                    <button class="back-btn" title="Back to Chats" data-ga-event="back_to_chats">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <div class="chat-contact">
+                        <img src="assets/images/team1.jpeg" alt="Contact" class="contact-img">
+                        <div class="contact-info">
+                            <span class="contact-name">Support Team</span>
+                            <span class="contact-status">Online</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="typing-indicator" style="display: none;">Support Team is typing...</div>
+                    <!-- Messages injected here -->
+                </div>
+                <div class="chat-input">
+                    <button class="emoji-btn" title="Emoji" data-ga-event="emoji_toggle">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <input type="text" placeholder="Type a message..." class="message-input" />
+                    <button class="send-btn" title="Send" data-ga-event="send_message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- New Chat Modal -->
+        <div class="modal" id="new-chat-modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Select Contact</h3>
+                <div class="contact-list">
+                    <!-- Contacts injected here -->
+                </div>
+                <button class="modal-close-btn"><i class="fas fa-times"></i> Close</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-column animate-fade">
+                <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+                <p>Your trusted partner in engineering &amp; construction tools.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> 5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
+                    <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+                    <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
+                </div>
+            </div>
+            <div class="footer-column animate-fade">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="shop.php" data-ga-event="footer_nav" data-ga-value="shop">Shop</a></li>
+                    <li><a href="cart.php" data-ga-event="footer_nav" data-ga-value="cart">Cart</a></li>
+                    <li><a href="contact.php" data-ga-event="footer_nav" data-ga-value="contact">Contact</a></li>
+                    <li><a href="about.php" data-ga-event="footer_nav" data-ga-value="about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-column animate-fade">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to get updates & offers.</p>
+                <div class="footer-newsletter">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="button" data-ga-event="newsletter_subscribe">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="footer-socials">
+                    <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="twitter"><i
+                            class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="linkedin"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span class="year"></span> SWISSTools. All rights reserved.</p>
+        </div>
+        <button type="button" class="scroll-top-btn" title="Go to top" data-ga-event="scroll_top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <!-- JS -->
+    <script type="module" src="assets/js/chat.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - SWISSTools</title>
+    <link rel="stylesheet" href="../assets/css/manage_order_details.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    </script>
+  </head>
+  <body>
+    <div class="order-details-container">
+      <div class="order-details-card">
+        <div class="logo">
+          <a href="/admin">SWISS<span class="highlight">Tools</span></a>
+        </div>
+        <h1>Order Details</h1>
+        <h2>Order Information</h2>
+        <div class="order-info">
+          <div><strong>Order ID:</strong>
+            <span id="order-id"></span></div>
+          <div><strong>Customer:</strong>
+            <span id="customer"></span></div>
+          <div><strong>Date:</strong>
+            <span id="date"></span></div>
+          <div><strong>Amount:</strong>
+            $<span id="amount"></span></div>
+          <div><strong>Status:</strong>
+            <span id="status" class="status-badge"></span></div>
+          <div class="status-control">
+            <label for="update-status">Update Status:</label>
+            <select id="update-status" data-ga-event="update_status">
+              <option value="pending">Pending</option>
+              <option value="shipped">Shipped</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button type="button" class="update-status-btn" data-ga-event="update_status_btn">Update</button>
+          </div>
+        </div>
+        <h2>Customer Details</h2>
+        <div class="customer-details">
+          <div><strong>Email:</strong>
+            <span id="customer-email"></span></div>
+          <div><strong>Phone:</strong>
+            <span id="customer-phone"></span></div>
+          <div><strong>Address:</strong>
+            <span id="customer-address"></span></div>
+        </div>
+        <h2>Items</h2>
+        <div class="items-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price ($)</th>
+                <th>Total ($)</th>
+              </tr>
+            </thead>
+            <tbody id="items-list"></tbody>
+          </table>
+          <div class="no-items">No items found</div>
+        </div>
+        <button type="button" class="back-btn" data-ga-event="back_to_orders">Back to Orders</button>
+      </div>
+    </div>
+    <!-- GSAP -->
+    <script type="importmap">
+      {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
+    </script>
+    <script type="module" src="../assets/js/manage_order_details.js"></script>
+  </body>
+</html>

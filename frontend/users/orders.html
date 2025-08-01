@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - SWISSTools</title>
+  <link rel="stylesheet" href="assets/css/users_orders.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">SWISS<span class="highlight">Tools</span></a>
+      </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars menu-icon"></i>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="/shop">Shop</a></li>
+          <li class="nav-item"><a href="/about">About Us</a></li>
+          <li class="nav-item"><a href="/contact">Contact</a></li>
+          <li class="nav-item"><a href="/faq">FAQs/Help</a></li>
+        </ul>
+      </nav>
+      <div class="header-extras">
+        <div class="theme-toggle">
+          <button type="button" class="theme-toggle-btn" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <div class="language-selector">
+          <button type="button" class="language-toggle" title="Select Language">
+            <i class="fas fa-globe"></i>
+          </button>
+          <ul class="language-options">
+            <li data-lang="en">En</li>
+            <li data-lang="es">Esp</li>
+            <li data-lang="fr">Fr</li>
+          </ul>
+        </div>
+        <div class="notification">
+          <button type="button" class="notification-btn" title="Notifications">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">3</span>
+          </button>
+        </div>
+        <div class="user-profile">
+          <img src="../assets/images/team1.jpeg" alt="User Profile" class="profile-img">
+          <div class="profile-info">
+            <span class="profile-name">John Doe</span>
+            <span class="profile-status">Active</span>
+          </div>
+          <ul class="profile-dropdown">
+            <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i>
+                Dashboard</a></li>
+            <li><a href="/orders"><i class="fas fa-shopping-bag"></i>
+                My Orders</a></li>
+            <li><a href="/wishlist"><i class="fas fa-heart"></i>
+                Wishlist</a></li>
+            <li><a href="/profile"><i class="fas fa-user"></i>
+                Account Info</a></li>
+            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i>
+                Logout</a></li>
+          </ul>
+        </div>
+        <div class="settings">
+          <button type="button" class="settings-btn" title="Settings">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Settings Modal -->
+  <div class="settings-modal">
+    <div class="settings-content">
+      <h2>Account Settings</h2>
+      <form class="settings-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" value="John Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" value="123 Builder Lane, Lagos, Nigeria" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" value="+234 812 345 6789" required>
+        </div>
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input type="password" id="password" placeholder="Enter new password">
+        </div>
+        <div class="form-group">
+          <button type="button" class="delete-account-btn">Delete Account</button>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="save-settings">Save Changes</button>
+          <button type="button" class="close-settings">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Order Details Modal -->
+  <div class="order-details-modal">
+    <div class="order-details-content">
+      <h2>Order Details</h2>
+      <div class="order-details-body">
+        <!-- Populated by JavaScript -->
+      </div>
+      <div class="order-details-actions">
+        <button type="button" class="close-order-details">Close</button>
+      </div>
+    </div>
+  </div>
+  <!-- Main Content -->
+  <main class="orders-main">
+    <section class="orders-content">
+      <h1>My Orders</h1>
+      <div class="orders-filters">
+        <div class="filter-group">
+          <label for="filter-item">Search by Item</label>
+          <input type="text" id="filter-item" class="filter-input" placeholder="Enter item name">
+        </div>
+        <div class="filter-group">
+          <label for="filter-status">Filter by Status</label>
+          <select id="filter-status" class="filter-select">
+            <option value="all">All</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Pending">Pending</option>
+          </select>
+        </div>
+      </div>
+      <div class="orders-table-container">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th data-sort="id">Order ID
+                <i class="fas fa-sort"></i>
+              </th>
+              <th data-sort="date">Date
+                <i class="fas fa-sort"></i>
+              </th>
+              <th data-sort="item">Item
+                <i class="fas fa-sort"></i>
+              </th>
+              <th data-sort="quantity">Quantity
+                <i class="fas fa-sort"></i>
+              </th>
+              <th data-sort="total">Total
+                <i class="fas fa-sort"></i>
+              </th>
+              <th data-sort="status">Status
+                <i class="fas fa-sort"></i>
+              </th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button type="button" class="pagination-btn prev-page">Previous</button>
+        <div class="page-numbers"></div>
+        <button type="button" class="pagination-btn next-page">Next</button>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column animate-fade">
+        <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+        <p>Your trusted partner in engineering & construction tools.</p>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i>
+            5 Cherubim Road, Mile 3 Market, Port Harcourt</p>
+          <p><i class="fas fa-phone-alt"></i>
+            +234 913 232 8654</p>
+          <p><i class="fas fa-envelope"></i>
+            support@swisstools.store</p>
+        </div>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/shop">Categories</a></li>
+          <li><a href="/faq">FAQs</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Information</h4>
+        <ul class="footer-links">
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/return-policy">Returns</a></li>
+        </ul>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to get updates & offers.</p>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">
+            <span class="visually-hidden"></span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+        <div class="footer-socials">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i><span class="visually-hidden"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©
+        <span class="year"></span>
+        SWISSTools. All rights reserved.
+      </p>
+    </div>
+    <button type="button" class="scroll-top-btn" title="Go to top">
+      <span class="visually-hidden"></span>
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </footer>
+  <!-- GSAP and ScrollTrigger -->
+  <script type="importmap">
+      {"imports":{"gsap":"https://cdn.skypack.dev/gsap","gsap/ScrollTrigger":"https://cdn.skypack.dev/gsap/ScrollTrigger"}}
+    </script>
+  <script type="module" src="assets/js/users_orders.js"></script>
+</body>
+
+</html>

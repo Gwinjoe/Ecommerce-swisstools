@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout - SWISSTools</title>
+  <link rel="stylesheet" href="../assets/css/admin_logout.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+</head>
+
+<body>
+  <div class="logout-container">
+    <div class="logout-card">
+      <div class="logo">
+        <a href="/admin">SWISS<span class="highlight">Tools</span></a>
+      </div>
+      <h1>Logout</h1>
+      <p class="logout-message">Are you sure you want to log out?</p>
+      <div class="logout-actions">
+        <a href="/api/signout"><button type="button" class="confirm-btn" data-ga-event="confirm_logout">Confirm
+            Logout</button></a>
+        <button type="button" class="cancel-btn" data-ga-event="cancel_logout">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <!-- GSAP -->
+  <script type="importmap">
+      {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
+    </script>
+  <script type="module" src="../assets/js/admin_logout.js"></script>
+</body>
+
+</html>
