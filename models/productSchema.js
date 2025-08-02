@@ -3,13 +3,42 @@ const mongoose = require("mongoose");
 const productSchema = mongoose.Schema({
   name: {
     type: String,
-    required: [true, "A name for the category is required"],
+    required: [true, "A name for the product is required"],
     trim: true,
   },
   description: {
     type: String,
-    required: [true, "A description for the category is required"],
     trim: true,
+  },
+  price: {
+    type: mongoose.Types.Decimal128,
+    required: [true, "A price is required for the product is required"],
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+  },
+  stock: {
+    type: Number,
+    required: [true, "Stock Quantity is required"],
+  },
+  images: {
+    mainImage: {
+      type: String,
+      required: [true, "An Image is required for the product"],
+    },
+    thumbnails: [{
+      type: String,
+    }],
+  },
+  keyFeatures: [{
+    type: String,
+  }],
+  whatsInBox: [{
+    type: String,
+  }],
+  productDetails: {
+    type: String,
   },
 
 }, {

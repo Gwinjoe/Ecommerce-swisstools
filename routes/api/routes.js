@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category } = require("../../controllers/productController")
+const { getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category, add_product } = require("../../controllers/productController")
 const passport = require("passport");
 const { signup, signout, adminSignout } = require("../../controllers/authController")
 const { get_users, get_user_by_id, edit_user, delete_user, user_count, add_user } = require("../../controllers/userController")
@@ -12,6 +12,8 @@ router.get("/logout", signout);
 router.get("/signout", adminSignout);
 
 router.get("/products", getProducts);
+router.post("/add_product", add_product);
+
 router.post("/add_category", add_category);
 router.get("/categories", get_categories);
 router.get("/categories/:id", get_category_by_id);

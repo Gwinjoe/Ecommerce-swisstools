@@ -1,14 +1,69 @@
-const Products = require("../models/productSchema");
+const Product = require("../models/productSchema");
 const Category = require("../models/categorySchema");
 
 exports.getProducts = async (req, res) => {
-  const results = await Products.find().sort({ createdAt: -1 });
+  const results = await Product.find().sort({ createdAt: -1 });
   res.status(200).json(results);
 }
 
 exports.add_product = async (req, res) => {
+  const {
+    name,
+    description,
+    price,
+    category,
+    stock,
+    keyFeatures,
+    whatsInBox,
+    productDetails,
+    mainImage,       // Cloudinary URL
+    thumbnails       // Array of Cloudinary URLs
+  } = req.body;
 
-}
+  try {
+    // Check if product already exists
+    const existingProduct = await Product.findOne({ name });
+    if (existingProduct) {
+      return res.status(409).json({
+        success: false,
+        message: "Product with this name already exists!"
+      });
+    }
+
+    // Create new product
+    const newProduct = new Product({
+      name,
+      description,
+      price: parseFloat(price),
+      category,
+      stock: parseInt(stock),
+      keyFeatures: Array.isArray(keyFeatures) ? keyFeatures : [keyFeatures],
+      whatsInBox: Array.isArray(whatsInBox) ? whatsInBox : [whatsInBox],
+      productDetails,
+      images: {
+        mainImage,
+        thumbnails,
+      }
+    });
+
+    // Save to database
+    const result = await newProduct.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Product created successfully!",
+      product: result
+    });
+
+  } catch (error) {
+    console.error("Product creation error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message
+    });
+  }
+};
 
 exports.get_categories = async (req, res) => {
   try {

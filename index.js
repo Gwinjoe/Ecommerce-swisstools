@@ -9,6 +9,7 @@ const passport = require("passport");
 const session = require("express-session");
 const adminRoutes = require("./routes/admin");
 const rootRoutes = require("./routes/root")
+const cors = require("cors");
 
 const MongoStore = require("connect-mongo");
 
@@ -17,6 +18,7 @@ connectDB(DATABASE_URI);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use("/", express.static(path.join(__dirname, "frontend")));
 app.use("/admin", express.static(path.join(__dirname, "frontend")));
 app.use(session({

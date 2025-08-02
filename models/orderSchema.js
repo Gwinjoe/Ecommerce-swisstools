@@ -18,7 +18,7 @@ const orderSchema = mongoose.Schema({
       default: 1,
     },
     totalPrice: {
-      type: Money,
+      type: mongoose.Types.Decimal128,
     }
   }],
   customer: {

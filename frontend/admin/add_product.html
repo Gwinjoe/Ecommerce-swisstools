@@ -1,106 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product - SWISSTools</title>
-    <link rel="stylesheet" href="../assets/css/add_product.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product - SWISSTools</title>
+  <link rel="stylesheet" href="../assets/css/add_product.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
     function gtag() {dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
-    </script>
-  </head>
-  <body>
-    <div class="add-product-container">
-      <div class="add-product-card">
-        <div class="logo">
-          <a href="/admin">SWISS<span class="highlight">Tools</span></a>
-        </div>
-        <h1>Add New Product</h1>
-        <form method="post" action="/api/add_product">
-          <div class="add-product-form">
-            <div class="form-group">
-              <label for="product-name">Product Name</label>
-              <input type="text" id="product-name" placeholder="Enter product name" data-ga-event="product_name_input">
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id="description" placeholder="Enter product description" data-ga-event="description_input"></textarea>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="price">Price ($)</label>
-              <input type="number" id="price" placeholder="Enter price" step="0.01" data-ga-event="price_input">
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="category">Category</label>
-              <select id="category" data-ga-event="category_select">
-                <option value="">Loading categories...</option>
-              </select>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="stock">Stock Quantity</label>
-              <input type="number" id="stock" placeholder="Enter stock quantity" data-ga-event="stock_input">
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="image">Product Images (Main and Thumbnails)</label>
-              <input type="file" id="image" accept="image/png,image/jpeg" multiple data-ga-event="image_input">
-              <div class="image-preview" id="image-preview"></div>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label>Key Features</label>
-              <div class="dynamic-list" id="key-features">
-                <div class="dynamic-item">
-                  <input type="text" placeholder="Enter key feature" data-ga-event="key_feature_input">
-                  <button type="button" class="remove-item" data-ga-event="remove_key_feature"><i class="fas fa-trash"></i></button>
-                </div>
-              </div>
-              <button type="button" class="add-item" data-ga-event="add_key_feature">Add Feature</button>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label>What's in the Box</label>
-              <div class="dynamic-list" id="whats-in-box">
-                <div class="dynamic-item">
-                  <input type="text" placeholder="Enter item in box" data-ga-event="whats_in_box_input">
-                  <button type="button" class="remove-item" data-ga-event="remove_whats_in_box"><i class="fas fa-trash"></i></button>
-                </div>
-              </div>
-              <button type="button" class="add-item" data-ga-event="add_whats_in_box">Add Item</button>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-group">
-              <label for="product-details">Product Details</label>
-              <textarea id="product-details" placeholder="Enter detailed product summary" data-ga-event="product_details_input"></textarea>
-              <div class="error-message"></div>
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="add-btn" data-ga-event="add_product">Add Product</button>
-              <button type="button" class="cancel-btn" data-ga-event="cancel_add_product">Cancel</button>
-            </div>
-          </div>
-        </form>
+  </script>
+</head>
+
+<body>
+  <div class="add-product-container">
+    <div class="add-product-card">
+      <div class="logo">
+        <a href="/admin">SWISS<span class="highlight">Tools</span></a>
       </div>
+      <h1>Add New Product</h1>
+      <form method="post" action="/api/add_product">
+        <div class="add-product-form">
+          <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" placeholder="Enter product name" data-ga-event="product_name_input">
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="Enter product description"
+              data-ga-event="description_input"></textarea>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="price">Price ($)</label>
+            <input type="number" id="price" placeholder="Enter price" step="0.01" data-ga-event="price_input">
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" data-ga-event="category_select">
+              <option value="">Loading categories...</option>
+            </select>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="stock">Stock Quantity</label>
+            <input type="number" id="stock" placeholder="Enter stock quantity" data-ga-event="stock_input">
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="image">Product Images (Main and Thumbnails)</label>
+            <input type="file" id="image" accept="image/png,image/jpeg" multiple data-ga-event="image_input">
+            <div class="image-preview" id="image-preview"></div>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label>Key Features</label>
+            <div class="dynamic-list" id="key-features">
+              <div class="dynamic-item">
+                <input type="text" placeholder="Enter key feature" data-ga-event="key_feature_input">
+                <button type="button" class="remove-item" data-ga-event="remove_key_feature"><i
+                    class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            <button type="button" class="add-item" data-ga-event="add_key_feature">Add Feature</button>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label>What's in the Box</label>
+            <div class="dynamic-list" id="whats-in-box">
+              <div class="dynamic-item">
+                <input type="text" placeholder="Enter item in box" data-ga-event="whats_in_box_input">
+                <button type="button" class="remove-item" data-ga-event="remove_whats_in_box"><i
+                    class="fas fa-trash"></i></button>
+              </div>
+            </div>
+            <button type="button" class="add-item" data-ga-event="add_whats_in_box">Add Item</button>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-group">
+            <label for="product-details">Product Details</label>
+            <textarea id="product-details" placeholder="Enter detailed product summary"
+              data-ga-event="product_details_input"></textarea>
+            <div class="error-message"></div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="mainaddbtn" class="add-btn" data-ga-event="add_product">Add Product</button>
+            <button type="button" class="cancel-btn" data-ga-event="cancel_add_product">Cancel</button>
+          </div>
+        </div>
+      </form>
     </div>
-    <!-- GSAP -->
-    <script type="importmap">
+  </div>
+  <!-- GSAP -->
+  <script type="importmap">
       {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
     </script>
-    <script type="module" src="../assets/js/add_product.js"></script>
-  </body>
+  <script type="module" src="../assets/js/add_product.js"></script>
+</body>
+
 </html>
