@@ -58,9 +58,9 @@ exports.add_user = async (req, res) => {
 }
 
 exports.edit_user = async (req, res) => {
-  const { id, name, email, admin } = req.body;
+  const { id, name, email, password, admin } = req.body;
   try {
-    const existingUser = await User.findById(id);
+    const existingUser = await User.findById(id).select("+password");
 
     if (!existingUser) {
       return res.status(401).json({ success: false, message: "Cannot find user" });
@@ -73,7 +73,9 @@ exports.edit_user = async (req, res) => {
     if (email) {
       existingUser.email = email;
     }
-
+    if (password) {
+      existingUser.password = await dohash(password, 12);
+    }
     if (admin) {
       existingUser.admin = admin;
     }

@@ -23,7 +23,7 @@ const uploader = async (file) => {
       }
     ]
   });
-  return url;
+  return { url, publicId: results.public_id };
 }
 
 module.exports = uploader

@@ -24,11 +24,24 @@ const productSchema = mongoose.Schema({
   },
   images: {
     mainImage: {
-      type: String,
-      required: [true, "An Image is required for the product"],
+      url: {
+        type: String,
+        required: [true, "An Image is required for the product"],
+      },
+      productId: {
+        type: String,
+        required: [true, "The product id is required"],
+      }
     },
     thumbnails: [{
-      type: String,
+      url: {
+        type: String,
+        required: [true, "An Image is required for the product"],
+      },
+      productId: {
+        type: String,
+        required: [true, "The product id is required"],
+      }
     }],
   },
   keyFeatures: [{

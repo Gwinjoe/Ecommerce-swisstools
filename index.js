@@ -31,6 +31,7 @@ app.use(session({
   }
 }))
 
+require("./config/cloudinary");
 require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());

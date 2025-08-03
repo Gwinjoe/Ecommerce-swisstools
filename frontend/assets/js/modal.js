@@ -1,4 +1,4 @@
-export default function showStatusModal(status) {
+export default function showStatusModal(status, msg) {
   // Create overlay and modal elements
   const overlay = document.createElement('div');
   const modal = document.createElement('div');
@@ -15,7 +15,7 @@ export default function showStatusModal(status) {
                       stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" class="check"/>
             </svg>
         `;
-    message.textContent = 'Success!';
+    message.textContent = msg ? msg : "success";
   } else {
     svgContent = `
             <svg viewBox="0 0 100 100" class="status-icon">
@@ -26,7 +26,7 @@ export default function showStatusModal(status) {
                       stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" class="line2"/>
             </svg>
         `;
-    message.textContent = 'Failed!';
+    message.textContent = msg ? msg : 'Failed!';
   }
 
   // Set element attributes
@@ -57,8 +57,8 @@ export default function showStatusModal(status) {
     `;
 
   iconContainer.style.cssText = `
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         margin: 0 auto 15px;
     `;
 

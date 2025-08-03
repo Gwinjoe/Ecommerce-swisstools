@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category, add_product } = require("../../controllers/productController")
+const { delete_product, getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category, add_product } = require("../../controllers/productController")
 const passport = require("passport");
 const { signup, signout, adminSignout } = require("../../controllers/authController")
 const { get_users, get_user_by_id, edit_user, delete_user, user_count, add_user } = require("../../controllers/userController")
+const multer = require('multer');
+const upload = multer({ dest: '../../tmp/uploads' });
 
 router.post("/login", passport.authenticate("local", { successRedirect: "/dashboard", failureRedirect: "/login" }));
 router.post("/signin", passport.authenticate("local", { successRedirect: "/admin", failureRedirect: "/admin/login" }));
@@ -12,7 +14,12 @@ router.get("/logout", signout);
 router.get("/signout", adminSignout);
 
 router.get("/products", getProducts);
-router.post("/add_product", add_product);
+router.post('/add_product',
+  upload.fields([
+    { name: 'mainImage', maxCount: 1 },
+    { name: 'thumbnails', maxCount: 6 } // Up to 6 thumbnails
+  ]), add_product);
+router.delete("/delete_product/:id", delete_product);
 
 router.post("/add_category", add_category);
 router.get("/categories", get_categories);
@@ -27,4 +34,5 @@ router.put("/edit_user", edit_user);
 router.delete("/delete_user/:id", delete_user);
 
 router.get("/usercount", user_count);
+
 module.exports = router;

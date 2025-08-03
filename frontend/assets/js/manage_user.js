@@ -1,12 +1,12 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import showStatusModal from "./modal.js"
 
 gsap.registerPlugin(ScrollTrigger);
+import showStatusModal from "./modal.js"
 
-const response = await fetch("/api/users");
-const { data } = await response.json();
-const users = data;
+const response = await fetch("http://localhost:3500/api/users")
+const results = await response.json();
+const users = results.data
 
 const tableBody = document.getElementById("userTableBody");
 const modal = document.getElementById("userModal");
@@ -159,9 +159,9 @@ function renderTable(data) {
             <td>${sanitizeInput(user.status)}</td>
             <td>${sanitizeInput(user.admin)}</td>
             <td>
-                <button class="action-btn" data-action="view" data-id="${user._id}" aria-label="View User"><i class="fas fa-eye"></i></button>
-                <button class="action-btn" data-action="edit" data-id="${user._id}" aria-label="Edit User"><i class="fas fa-edit"></i></button>
-                <button class="action-btn" data-action="delete" data-id="${user._id}" aria-label="Delete User"><i class="fas fa-trash-alt"></i></button>
+                <button class="action-btn" data-action="view" data-id="${user._id.toString()}" aria-label="View User"><i class="fas fa-eye"></i></button>
+                <button class="action-btn" data-action="edit" data-id="${user._id.toString()}" aria-label="Edit User"><i class="fas fa-edit"></i></button>
+                <button class="action-btn" data-action="delete" data-id="${user._id.toString()}" aria-label="Delete User"><i class="fas fa-trash-alt"></i></button>
             </td>
         `;
     tableBody.appendChild(row);
@@ -177,7 +177,7 @@ function sanitizeInput(input) {
 }
 
 // Modal Functions
-window.openModal = function(mode, id = null) {
+window.openModal = function(mode, id) {
   if (!modal || isModalAnimating) return;
   isModalAnimating = true;
 
@@ -191,6 +191,7 @@ window.openModal = function(mode, id = null) {
   const emailInput = document.getElementById("userEmail");
   const statusInput = document.getElementById("userStatus");
   const saveButton = document.querySelector(".save-user");
+  const passwordInput = document.querySelector("#password");
 
   if (!title || !userIdInput || !nameInput || !emailInput || !statusInput || !saveButton) {
     isModalAnimating = false;
@@ -199,31 +200,35 @@ window.openModal = function(mode, id = null) {
 
   userIdInput.value = "";
   nameInput.value = "";
+  passwordInput.value = "";
   emailInput.value = "";
-  statusInput.value = "active";
+  statusInput.value = "false";
 
   if (mode === "add") {
     title.innerHTML = `<i class="fas fa-user-plus"></i> Add User`;
     nameInput.disabled = false;
     emailInput.disabled = false;
+    passwordInput.disabled = false;
     statusInput.disabled = false;
     saveButton.style.display = "block";
   } else {
-    const user = users.find(u => u.id === id);
+    const user = users.find(u => u._id === id);
     if (!user) {
       isModalAnimating = false;
       return;
     }
 
-    userIdInput.value = user.id;
+    userIdInput.value = user._id;
     nameInput.value = user.name;
     emailInput.value = user.email;
-    statusInput.value = user.status;
+    passwordInput.value = ""
+    statusInput.value = user.admin;
 
     title.innerHTML = `<i class="fas fa-user-${mode === "edit" ? "edit" : ""}"></i> ${mode === "edit" ? "Edit" : "View"} User`;
     nameInput.disabled = mode === "view";
     emailInput.disabled = mode === "view";
     statusInput.disabled = mode === "view";
+    passwordInput.disabled = mode === "view";
     saveButton.style.display = mode === "view" ? "none" : "block";
   }
 
@@ -261,9 +266,8 @@ window.closeModal = function() {
 };
 
 window.deleteUser = async function(id) {
-  const index = users.findIndex(u => u.id === id);
+  const index = users.findIndex(u => u._id === id);
   if (index !== -1) {
-    users.splice(index, 1);
     const res = await fetch(`/api/delete_user/${id}`, {
       method: "DELETE",
       headers: {
@@ -277,6 +281,7 @@ window.deleteUser = async function(id) {
       showStatusModal("failed")
     }
 
+    users.splice(index, 1);
 
     renderTable(users);
   }
@@ -285,8 +290,8 @@ window.deleteUser = async function(id) {
 window.saveUser = async function() {
   const userIdInput = document.getElementById("userId");
   const nameInput = document.getElementById("userName");
-  const passwordInput = document.getElementById("password")
   const emailInput = document.getElementById("userEmail");
+  const passwordInput = document.getElementById("password");
   const statusInput = document.getElementById("userStatus");
 
   if (!userIdInput || !nameInput || !emailInput || !statusInput) return;
@@ -303,11 +308,28 @@ window.saveUser = async function() {
   }
 
   if (id) {
-    const user = users.find(u => u.id == id);
+    const user = users.find(u => u._id == id);
     if (user) {
       user.name = name;
       user.email = email;
       user.status = status;
+      const response = await fetch("/api/edit_user", {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id,
+          name,
+          email,
+          admin: status,
+          password
+        })
+      });
+      const { success } = await response.json();
+      if (success) {
+        showStatusModal("success");
+      } else {
+        showStatusModal("failed");
+      }
     }
   } else {
     const response = await fetch("/api/add_user", {
@@ -326,11 +348,10 @@ window.saveUser = async function() {
     } else {
       showStatusModal("failed");
     }
-    users.push({ id: Date.now(), name, email, status });
   }
 
-  renderTable(users);
   closeModal();
+  renderNewUsers();
 };
 
 // Event Delegation for Action Buttons
@@ -374,5 +395,10 @@ if (sortSelect) {
   });
 }
 
+async function renderNewUsers() {
+  const response = await fetch("/api/users");
+  const results = await response.json();
+  renderTable(results.data);
+}
 // Initial Render
 renderTable(users);

@@ -22,6 +22,7 @@
     "express-session": "^1.18.2",
     "joi": "^17.13.3",
     "mongoose": "^8.16.4",
+    "multer": "^2.0.2",
     "nodemailer": "^7.0.5",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

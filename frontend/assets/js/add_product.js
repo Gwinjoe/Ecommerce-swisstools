@@ -1,3 +1,4 @@
+import showStatusModal from "./modal.js";
 import { gsap } from "gsap";
 
 // Log script loading for debugging
@@ -14,11 +15,9 @@ function trackEvent(eventName, eventParams = {}) {
 
 // Mock API for dynamic category loading
 async function fetchCategories() {
-
   const response = await fetch("/api/categories");
   const { data } = await response.json();
   return data;
-
 }
 
 // Load categories dynamically
@@ -44,10 +43,51 @@ async function loadCategories() {
   }
 }
 
+function handleMainImageUpload() {
+  const mainImagePreview = document.querySelector("#main-image-preview");
+  const mainImageInput = document.querySelector("#mainImage");
+
+  if (!mainImageInput || mainImagePreview) {
+    console.error("Error: #mainImage or #mainImagePreview not found");
+    return;
+  }
+  mainImageInput.addEventListener("change", (e) => {
+
+    const file = e.target.files[0]
+
+    if (!file.type.match("image/(png|jpeg)")) {
+      error.textContent = "Only PNG and JPEG images are allowed";
+      error.classList.add("active");
+      gsap.from(error, { opacity: 0, y: 5, duration: 0.3, ease: "power3.out" });
+      mainImageInput.value = "";
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) { // 2MB limit
+      error.textContent = "Image size must be less than 5MB";
+      error.classList.add("active");
+      gsap.from(error, { opacity: 0, y: 5, duration: 0.3, ease: "power3.out" });
+      mainImageInput.value = "";
+      return;
+    }
+
+    const previewItem = document.createElement("div");
+    previewItem.classList.add("preview-item");
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+
+    previewItem.appendChild(img);
+    mainImagePreview.appendChild(previewItem);
+    gsap.from(previewItem, { opacity: 0, scale: 0.8, duration: 0.3, ease: "power3.out", delay: index * 0.1 });
+
+  })
+
+}
+
 // Handle image uploads and previews
 function handleImageUploads() {
   const imageInput = document.querySelector("#image");
   const imagePreview = document.querySelector("#image-preview");
+
   if (!imageInput || !imagePreview) {
     console.error("Error: #image or #image-preview not found");
     return;
@@ -68,7 +108,7 @@ function handleImageUploads() {
         imageInput.value = "";
         return;
       }
-      if (file.size > 2 * 1024 * 1024) { // 2MB limit
+      if (file.size > 5 * 1024 * 1024) { // 2MB limit
         error.textContent = "Image size must be less than 5MB";
         error.classList.add("active");
         gsap.from(error, { opacity: 0, y: 5, duration: 0.3, ease: "power3.out" });
@@ -96,7 +136,6 @@ function handleImageUploads() {
     allFiles.forEach((file, index) => {
       const previewItem = document.createElement("div");
       previewItem.classList.add("preview-item");
-      if (index === 0) previewItem.classList.add("main-image");
       const img = document.createElement("img");
       img.src = URL.createObjectURL(file);
       const removeBtn = document.createElement("button");
@@ -150,8 +189,6 @@ function handleImageUploads() {
         trackEvent("set_main_image");
       });
       previewItem.appendChild(img);
-      previewItem.appendChild(removeBtn);
-      previewItem.appendChild(setMainBtn);
       imagePreview.appendChild(previewItem);
       gsap.from(previewItem, { opacity: 0, scale: 0.8, duration: 0.3, ease: "power3.out", delay: index * 0.1 });
     });
@@ -227,6 +264,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load categories
   loadCategories();
 
+
+  handleMainImageUpload();
+
   // Handle image uploads
   handleImageUploads();
 
@@ -240,6 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const price = document.querySelector("#price");
     const category = document.querySelector("#category");
     const stock = document.querySelector("#stock");
+    const mainImage = document.querySelector("#mainImage");
     const images = document.querySelector("#image");
     const keyFeatures = document.querySelectorAll("#key-features input");
     const whatsInBox = document.querySelectorAll("#whats-in-box input");
@@ -313,6 +354,18 @@ document.addEventListener("DOMContentLoaded", () => {
       isValid = false;
     }
 
+    if (!mainImage || mainImage.files.length === 0) {
+      const error = mainImage?.nextElementSibling;
+      if (error) {
+        error.textContent = "The main-image is required";
+        error.classList.add("active");
+        mainImage.classList.add("invalid");
+        gsap.from(error, { opacity: 0, y: 5, duration: 0.3, ease: "power3.out" });
+      }
+      isValid = false;
+
+    }
+
     // Validate images
     if (!images || images.files.length === 0) {
       const error = images?.nextElementSibling;
@@ -364,100 +417,71 @@ document.addEventListener("DOMContentLoaded", () => {
     return isValid;
   }
 
-
-  const addBtn = document.querySelector("#mainaddbtn");
-
+  // Add product button handler
+  const addBtn = document.querySelector(".add-btn");
   if (addBtn) {
     addBtn.addEventListener("click", async () => {
       if (validateForm()) {
-        // Collect form data
-        const productData = {
-          name: document.querySelector("#product-name")?.value.trim(),
-          description: document.querySelector("#description")?.value.trim(),
-          price: parseFloat(document.querySelector("#price")?.value),
-          category: document.querySelector("#category")?.value,
-          stock: parseInt(document.querySelector("#stock")?.value),
-          keyFeatures: Array.from(document.querySelectorAll("#key-features input"))
-            .map(input => input.value.trim()).filter(val => val),
-          whatsInBox: Array.from(document.querySelectorAll("#whats-in-box input"))
-            .map(input => input.value.trim()).filter(val => val),
-          productDetails: document.querySelector("#product-details")?.value.trim()
-        };
+        const productName = document.querySelector("#product-name")?.value;
+        const description = document.querySelector("#description")?.value;
+        const price = document.querySelector("#price")?.value;
+        const category = document.querySelector("#category")?.value;
+        const stock = document.querySelector("#stock")?.value;
+        const mainImage = document.querySelector("#mainImage")?.files[0] || [];
+        const thumbnails = document.querySelector("#image")?.files || [];
+        const keyFeatures = Array.from(document.querySelectorAll("#key-features input")).map(input => input.value.trim()).filter(val => val);
+        const whatsInBox = Array.from(document.querySelectorAll("#whats-in-box input")).map(input => input.value.trim()).filter(val => val);
+        const productDetails = document.querySelector("#product-details")?.value;
 
-        // Process images
-        const imageFiles = Array.from(document.querySelector("#image")?.files || []);
-        const previewItems = document.querySelectorAll(".preview-item");
 
-        let mainImageFile = null;
-        const thumbnailFiles = [];
+        const formData = new FormData();
+        formData.append("name", productName);
+        formData.append("Description", description);
+        formData.append("price", price);
+        formData.append("category", category);
+        formData.append("stock", stock);
+        formData.append("mainImage", mainImage);
+        formData.append("thumbnails", thumbnails);
+        formData.append("keyFeatures", JSON.stringify(keyFeatures));
+        formData.append("whatsInBox", JSON.stringify(whatsInBox));
+        formData.append("productDetails", productDetails);
 
-        previewItems.forEach((item, index) => {
-          if (item.classList.contains("main-image") && imageFiles[index]) {
-            mainImageFile = imageFiles[index];
-          } else if (imageFiles[index]) {
-            thumbnailFiles.push(imageFiles[index]);
+        const response = await fetch("/api/add_product", {
+          method: "POST",
+          body: formData,
+        });
+        const { success, message } = await response.json();
+        if (success) {
+          showStatusModal("success", message);
+        } else {
+          showStatusModal("failed", message);
+        }
+
+        gsap.to(addBtn, {
+          scale: 0.95,
+          duration: 0.1,
+          ease: "power2.in",
+          onComplete: () => {
+            gsap.to(addBtn, { scale: 1, duration: 0.1 });
+            console.log(`Product added:`, {
+              productName,
+              description,
+              price,
+              category,
+              stock,
+              mainImage: mainImage?.name,
+              thumbnails: thumbnails.map(t => t.name),
+              keyFeatures,
+              whatsInBox,
+              productDetails
+            });
+            alert("Product added successfully (placeholder)");
+            trackEvent("add_product", { product_name: productName, category: category });
+            window.location.href = "index.html";
           }
         });
-
-        // Validate critical fields
-        if (!productData.name) {
-          alert("Product name is required!");
-          return;
-        }
-
-        if (isNaN(productData.stock)) {
-          alert("Stock quantity must be a valid number!");
-          return;
-        }
-
-        if (!mainImageFile) {
-          alert("Please select a main image!");
-          return;
-        }
-
-        try {
-          // Button animation
-          await animateButton(addBtn);
-
-          // Upload images to Cloudinary
-          const [mainImageUrl, ...thumbnailUrls] = await Promise.all([
-            uploadToCloudinary(mainImageFile),
-            ...thumbnailFiles.map(file => uploadToCloudinary(file))
-          ]);
-
-          // Combine data with proper structure
-          const finalData = {
-            ...productData,
-            images: {
-              main: mainImageUrl,
-              thumbnails: thumbnailUrls
-            }
-          };
-
-          // Submit to server
-          const response = await fetch("/api/add_product", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(finalData)
-          });
-
-          const result = await response.json();
-
-          if (!response.ok) {
-            throw new Error(result.message || "Failed to add product");
-          }
-
-          // Success handling
-          alert("Product added successfully!");
-          trackEvent("add_product", { product_name: productData.name });
-          window.location.href = "index.html";
-        } catch (error) {
-          console.error("Upload failed:", error);
-          alert(`Error: ${error.message}`);
-          trackEvent("add_product_failed");
-        }
       } else {
-        // Validation failed animation
+        alert("i am not being validated right");
         gsap.to(addBtn, {
           x: -10,
           duration: 0.1,
@@ -470,40 +494,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   } else {
     console.error("Error: .add-btn not found");
-  }
-
-  async function uploadToCloudinary(file) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "swisstools_images");
-
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/dlmscmwth/upload`,
-      { method: "POST", body: formData }
-    );
-
-    if (!response.ok) throw new Error("Cloudinary upload failed");
-
-    const data = await response.json();
-    console.log(data.secure_url)
-    return data.secure_url;
-  }
-
-  function animateButton(button) {
-    return new Promise(resolve => {
-      gsap.to(button, {
-        scale: 0.95,
-        duration: 0.1,
-        ease: "power2.in",
-        onComplete: () => {
-          gsap.to(button, {
-            scale: 1,
-            duration: 0.1,
-            onComplete: resolve
-          });
-        }
-      });
-    });
   }
 
   // Cancel button handler
