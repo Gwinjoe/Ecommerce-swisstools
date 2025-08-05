@@ -462,6 +462,9 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(alert.ids[0]);
             const response = await fetch("/api/delete_multiple", {
               method: "POST",
+              headers: {
+                'Content-Type': 'application/json'
+              },
               body: body,
             })
             const { success, message } = await response.json();
@@ -509,6 +512,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const response = await fetch("/api/edit_multiple", {
         method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ selectedIds, category: bulkCategorySelect.value }),
       })
       const { success, message } = await response.json();

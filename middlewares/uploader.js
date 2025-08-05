@@ -1,6 +1,5 @@
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
-const { default: pLimit } = require("p-limit");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -28,10 +27,9 @@ const uploader = async (file) => {
 }
 
 async function uploadMultiple(documentPaths) {
-  const limit = pLimit(10); // Limit concurrent uploads to 10
-  const uploadPromises = documentPaths.map(path =>
-    limit(() => cloudinary.uploader.upload(path))
-  );
+  const uploadPromises = documentPaths.map(async (path) => {
+    await cloudinary.uploader.upload(path)
+  });
   const results = await Promise.all(uploadPromises);
   // This array will contain the upload results for each document
   const finalResults = results.map((result) => {
