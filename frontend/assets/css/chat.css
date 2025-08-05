@@ -50,7 +50,7 @@ body {
 }
 
 .logo a {
-    font-family: var(--headline-font);
+    font-family: 'Iceberg', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--headline-color);
@@ -206,6 +206,7 @@ body {
 /* Chat Main */
 .chat-main {
     padding: 2rem 1rem;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     height: calc(100vh - 60px);
@@ -215,6 +216,7 @@ body {
     display: flex;
     height: 100%;
     background: var(--card-bg);
+    width: 100%;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     overflow: hidden;
@@ -348,6 +350,38 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--chat-bg) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACKADAAQAAAABAAAACAAAAADz/yfnAAAAV0lEQVQY02NgQAL/Gf4z4P///wz4//8/Q/7//38G/H//fwb8f//fAf////8M+P//fwb8f//fAf///38G/P//fwb8f//fAf////8M+P//fwb8//9/Bvx/BgB7Eyn3UUVsowAAAABJRU5ErkJggg==') repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
+    overflow-y: auto;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+}
+
+/* Optional: Customize scrollbar */
+.chat-window::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+.logo-img{
+    width: 40px;
+    height: auto;
+    margin-right:
 }
 
 .chat-header {
@@ -607,7 +641,7 @@ body {
     font-size: 1.75rem;
     font-weight: 600;
     color: white;
-    font-family: var(--headline-font);
+    font-family: 'Iceberg', sans-serif;
 }
 
 .footer-contact p,

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWISSTools - Online Store</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/swisstools_logo.png">
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+
+    <!-- Include Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo-flex">
+                <!-- Logo -->
+                <div class="logo animate-logo">
+                    <img src="assets/images/swisstools_logo.png" alt="Logo picture" class="logo-img">
+                    <a href="index.html" class="logo-text">SWISS<span class="highlight">Tools</span></a>
+                </div>
+
+                <!-- Toggle -->
+                <div class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </div>
+            </div>
+
+
+            <!-- Navigation -->
+            <nav class="nav">
+                <ul class="nav-list" id="nav-menu">
+                    <li class="nav-item"><a href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a href="about.html">About Us</a></li>
+                    <li class="nav-item"><a href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a href="faq.html">FAQs/Help</a></li>
+                </ul>
+            </nav>
+
+            <!-- Inline Icons Group -->
+            <div class="header-extras">
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select name="language" id="language">
+                        <option value="en">En</option>
+                        <option value="es">Sp</option>
+                        <option value="fr">Fr</option>
+                    </select>
+                </div>
+
+                <div class="auth-links">
+                    <i class="fas fa-user"></i>
+                    <a href="login.html">Login</a>
+                    <span class="separator">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+
+                <div class="cart">
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i>
+                        <span class="cart-text">Cart</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- header-two which contains the category select button and search bar -->
+    <div class="header-two">
+        <div class="container">
+            <!-- Custom Dropdown -->
+            <div class="custom-dropdown" id="categoryDropdown">
+                <div class="dropdown-selected">All Categories</div>
+                <ul class="dropdown-options">
+                    <li data-value="all">All Categories</li>
+                    <li data-value="electronics">Electronics</li>
+                    <li data-value="fashion">Fashion</li>
+                    <li data-value="home">Home &amp; Garden</li>
+                </ul>
+            </div>
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search for products, brands and more...">
+                <button type="submit" onclick="searchPage()">
+                    <span class="visually-hidden">Search</span>
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <main class="hero-section">
+        <div class="hero-bg-wrapper">
+            <img class="hero-bg kenburns" src="assets/images/main-bg-2.jpg" alt="Main background">
+        </div>
+
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <h1>
+                    Your Trusted <span class="highlight">iNGCO Tools Distributor</span>
+                </h1>
+                <p>Powering professionals with reliable tools, power equipment, and construction essentials—anywhere you are.</p>
+                <p>We proudly stock the complete range of <span class="hightlight">iNGCO products</span>, only at <a class="highlight" href="index.html">SWISSTools.</a></p>
+
+                <div class="hero-buttons">
+                    <a href="shop.html" class="btn btn-primary animate-up">Shop Now</a>
+                    <a href="shop.html" class="btn btn-secondary animate-up">View Categories</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Shop by category section -->
+    <section class="category-showcase">
+        <div class="container">
+            <!-- Left Section -->
+            <div class="brand-feature">
+                <h3 class="brand-name">iNG<span class="highlight">CO</span></h3>
+                <p class="brand-tagline">Reliable &amp; Durable Tools</p>
+                <a href="shop.html" class="btn btn-dark">Shop Now</a>
+
+                <!-- Swiper Slider -->
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide product-card" data-category="power">
+                            <img src="assets/images/product1.png" alt="Tool Kit">
+                            <h4>Tool Kit w/ Electric Drill</h4>
+                            <p class="price">₦66,000.00</p>
+                            <div class="card-bottom">
+                                <span class="rating">⭐ 4.5</span>
+                                <button class="btn btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide product-card" data-category="hand">
+                            <img src="assets/images/product2.png" alt="Wire Stripper">
+                            <h4>Wire Stripper Black/Red</h4>
+                            <p class="price">₦6,159.00</p>
+                            <div class="card-bottom">
+                                <span class="rating">⭐ 4.6</span>
+                                <button class="btn btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide product-card" data-category="electrical">
+                            <img src="assets/images/product3.jpeg" alt="Screwdriver Set">
+                            <h4>Electric Screwdriver Set</h4>
+                            <p class="price">₦10,000.00</p>
+                            <div class="card-bottom">
+                                <span class="rating">⭐ 4.7</span>
+                                <button class="btn btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination Dots -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <!-- Right Section -->
+            <div class="categories-grid">
+                <h2 class="section-title">Shop By Category</h2>
+                <div class="grid">
+                    <div class="cat-box active" data-filter="all">All</div>
+                    <div class="cat-box" data-filter="power">Power Tools</div>
+                    <div class="cat-box" data-filter="hand">Hand Tools</div>
+                    <div class="cat-box" data-filter="construction">Construction Equipment</div>
+                    <div class="cat-box" data-filter="safety">Safety Equipment</div>
+                    <div class="cat-box" data-filter="measuring">Measuring Tools</div>
+                    <div class="cat-box" data-filter="electrical">Electrical Tools</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products section -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Feature Products</h2>
+
+            <div class="product-grid" id="productGrid">
+                <!-- Product Card (repeatable block) -->
+                <div class="product-card animate-fade">
+                    <img src="assets/images/product1.png" alt="Tool Kit">
+                    <h4>Tools Box Kit Set With Electric Drill 133MM Machine</h4>
+                    <p class="price">₦66,000.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-fade">
+                    <img src="assets/images/product1.png" alt="Tool Kit">
+                    <h4>Tools Box Kit Set With Electric Drill 133MM Machine</h4>
+                    <p class="price">₦66,000.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+
+                <!-- Repeat for more products, some hidden initially -->
+
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card animate-fade hidden">
+                    <img src="assets/images/product2.png" alt="Wire Stripper">
+                    <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                    <p class="price">₦6,159.00</p>
+                    <div class="card-bottom">
+                        <div class="rating"><i class="fas fa-star"></i> 4.5</div>
+                        <button class="btn-cart" type="button">Add To Cart</button>
+                    </div>
+                </div>
+
+                <!-- Add as many cards as needed -->
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-wrapper">
+                <button id="loadMoreBtn" class="btn-load-more" type="button">Load More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Added Products Section -->
+    <section class="recent-products">
+        <div class="container">
+            <h2 class="section-title">Recently Added</h2>
+
+            <!-- Swiper -->
+            <div class="swiper recent-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product1.png" alt="Product">
+                            <h4>Tools Box Kit Set With Electric Drill 133MM Machine</h4>
+                            <div class="price">₦66,000.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="product-card">
+                            <img src="assets/images/product2.png" alt="Product">
+                            <h4>Mythco Self Adjusting Wire Stripper, Black/Red</h4>
+                            <div class="price">₦6,159.00</div>
+                            <div class="card-bottom">
+                                <span class="rating">★ 4.5</span>
+                                <button class="btn-cart" type="button">Add To Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more slides as needed -->
+                </div>
+
+                <!-- Swiper Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Call to Action Section -->
+    <section class="call-to-action">
+        <div class="cta-container">
+            <h2 class="cta-title">Why Choose Us for Engineering Tools</h2>
+            <div class="cta-grid">
+                <!-- <div class="cta-item">
+                    <i class="fas fa-shield-alt cta-icon"></i>
+                    <p>1-Year Warranty on All Tools</p>
+                </div> -->
+                <div class="cta-item">
+                    <i class="fas fa-check-circle cta-icon"></i>
+                    <p>Certified Quality &amp; Best Prices</p>
+                </div>
+                <div class="cta-item">
+                    <i class="fas fa-truck cta-icon"></i>
+                    <p>Free Shipping Over $500</p>
+                </div>
+                <div class="cta-item">
+                    <i class="fas fa-headset cta-icon"></i>
+                    <p>Expert Support &amp; Training</p>
+                </div>
+            </div>
+            <a href="shop.html" class="cta-button">Explore Tools Now</a>
+            <!-- <p class="cta-subtext">Join our community for exclusive offers and tips!</p> -->
+        </div>
+        <canvas id="particle-canvas"></canvas>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- Company Info -->
+            <div class="footer-column animate-fade">
+                <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+                <p>Your trusted partner in engineering &amp; construction tools.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> No 5, Chief Tom Agbuji Street (Cherubim Road) Mile 3, Port Harcourt, Nigeria.</p>
+                    <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+                    <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-column animate-fade">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.html">Categories</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Information -->
+            <div class="footer-column animate-fade">
+                <h4>Information</h4>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="return-policy.html">Returns</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="footer-column animate-fade">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to get updates and offers.</p>
+                <form class="footer-newsletter">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">
+                        <span class="visually-hidden">Subscribe</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="footer-socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i><span class="visually-hidden">Facebook</span></a>
+                    <a href="http://instagram.com/swisstools_/"><i class="fab fa-instagram"></i><span class="visually-hidden">Instagram</span></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i><span class="visually-hidden">Twitter</span></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i><span class="visually-hidden">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> SWISSTools. All rights reserved.</p>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <button id="scrollTopBtn" title="Go to top" type="button">
+            <span class="visually-hidden">Scroll to top</span>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Importmap -->
+    <script type="importmap">
+        {"imports":{"gsap":"https://cdn.skypack.dev/gsap","gsap/ScrollTrigger":"https://cdn.skypack.dev/gsap/ScrollTrigger"}}
+    </script>
+
+    <!-- Call to action js file link -->
+    <script type="module" src="assets/js/call-to-action.js"></script>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

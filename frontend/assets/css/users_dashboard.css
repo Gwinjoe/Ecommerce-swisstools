@@ -36,6 +36,11 @@ body {
     z-index: 1000;
 }
 
+.logo-img{
+    width: 40px;
+    height: 40px;
+}
+
 .sticky-header .container {
     max-width: 1200px;
     margin: auto;
@@ -47,7 +52,7 @@ body {
 }
 
 .logo a {
-    font-family: var(--headline-font);
+    font-family: 'Iceberg', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--headline-color);
@@ -652,7 +657,7 @@ body {
 .footer-logo {
     font-size: 2rem;
     color: white;
-    font-family: var(--headline-font);
+    font-family: 'Iceberg', sans-serif;
 }
 
 .footer-contact p,

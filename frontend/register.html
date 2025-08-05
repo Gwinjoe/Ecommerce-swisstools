@@ -2,71 +2,75 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - SWISSTools</title>
-  <link rel="stylesheet" href="assets/css/register.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet">
-  <!-- Font Awesome CDN -->
-  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SWISSTools</title>
+    <link rel="stylesheet" href="assets/css/register.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <!-- Main Content -->
-  <main class="container register-container animate-fade">
-    <h1 class="register-title">Register</h1>
-    <div class="register-form-container">
-      <button type="button" class="btn btn-email-register"><i class="fas fa-envelope"></i>
-        Register with
-        Email</button>
-      <form class="register-form" method="post" action="api/signup">
-        <div class="form-group">
-          <label for="username"><i class="fas fa-user"></i>
-            Fullname</label>
-          <input type="text" id="username" name="name" required placeholder="Enter your full name">
+
+    <section class="register-section">
+        <!-- Diagonal style for Register Page -->
+        <div class="diagonal">
+            <div class="diagonal-content">
+                <img src="assets/images/swisstools_logo.png" alt="SWISSTools Logo" class="logo">
+                <h1>Create an Account</h1>
+                <p>Join SWISSTools today and get access to the best tools at unbeatable prices.</p>
+            </div>
         </div>
-        <div class="form-group">
-          <label for="email"><i class="fas fa-envelope"></i>
-            Email</label>
-          <input type="email" id="email" name="email" required placeholder="Enter your email">
-        </div>
-        <div class="form-group">
-          <label for="password"><i class="fas fa-lock"></i>
-            Password</label>
-          <input type="password" name="password" id="password" required placeholder="Enter your password">
-        </div>
-        <div class="form-group">
-          <label for="confirm-password"><i class="fas fa-lock"></i>
-            Confirm Password</label>
-          <input type="password" id="confirm-password" required placeholder="Confirm your password">
-        </div>
-        <div class="form-options">
-          <p>Already have an account?
-            <a href="/login">Login</a>
-          </p>
-        </div>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i>
-          Register</button>
-      </form>
-    </div>
-    <div class="social-login">
-      <p>Or register with:</p>
-      <div class="social-buttons">
-        <button type="button" class="btn btn-social btn-google" title="Register with Google"><i
-            class="fab fa-google"></i></button>
-      </div>
-    </div>
-  </main>
-  <!-- JavaScript -->
-  <script type="importmap">
-      {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
+        <!-- Main Content -->
+        <main class="container register-container animate-fade">
+            <div class="register-form-container">
+                <h1 class="register-title">Register</h1>
+                <button type="button" class="btn btn-email-register"><i class="fas fa-envelope"></i> Register with
+                    Email</button>
+                <form class="register-form">
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Username</label>
+                        <input type="text" id="username" required placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password</label>
+                        <input type="password" id="password" required placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password"><i class="fas fa-lock"></i> Confirm Password</label>
+                        <input type="password" id="confirm-password" required placeholder="Confirm your password">
+                    </div>
+                    <div class="form-options">
+                        <p>Already have an account? <a href="login.html">Login</a></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-user-plus"></i> Register</button>
+                </form>
+                <div class="social-login">
+                    <p>Or register with:</p>
+                    <div class="social-buttons">
+                        <button type="button" class="btn btn-social btn-google" title="Register with Google"><i
+                                class="fab fa-google"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- JavaScript -->
+    <script type="importmap">
+        {"imports":{"gsap":"https://cdn.skypack.dev/gsap"}}
     </script>
-  <script type="module" src="assets/js/register.js"></script>
+    <script type="module" src="assets/js/register.js"></script>
 </body>
 
 </html>

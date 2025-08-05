@@ -224,18 +224,18 @@ header {
     header .container {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 2px;
     }
 
     .header-two .container {
-        margin-top: 30px;
+        margin-top: 5px;
     }
 
     .header-extras {
         flex-direction: row;
-        justify-content: flex-start;
+        justify-content: center;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
         width: 100%;
     }
 
@@ -272,6 +272,7 @@ header {
     font-weight: 700;
     color: var(--headline-color);
     text-decoration: none;
+    padding: 0 40px;
 }
 
 .header-two .container {
@@ -396,8 +397,8 @@ header {
 @media (max-width: 768px) {
     .header-two .container {
         flex-direction: column;
-        align-items: stretch;
-        padding: 0 20px;
+        align-items: center;
+        justify-content: center;
     }
 
     .search-bar {
@@ -520,9 +521,18 @@ header {
 
 /* Hero Content */
 .hero-content {
-    text-align: left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
     max-width: 650px;
     padding: 20px;
+}
+
+.hero-content a{
+    text-decoration: none;
+    font-weight: bold;
 }
 
 /* Headline */
@@ -546,6 +556,10 @@ header {
     line-height: 1.6;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
+}
+
+.highlight{
+    font-weight: bold;
 }
 
 /* Highlight */

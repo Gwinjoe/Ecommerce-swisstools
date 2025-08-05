@@ -2,275 +2,281 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SWISSTools - Shop</title>
-  <link rel="stylesheet" href="assets/css/shop.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-    rel="stylesheet">
-  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWISSTools - Shop</title>
+    <link rel="stylesheet" href="assets/css/shop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="assets/images/swisstools_logo.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-  <!-- The Header -->
-  <header class="sticky-header">
-    <div class="container">
-      <div class="logo-flex">
-        <div class="logo">
-          <a href="/">SWISS<span class="highlight">Tools</span></a>
+    <!-- The Header -->
+    <header class="sticky-header">
+        <div class="container">
+            <div class="logo-flex">
+                <div class="logo animate-logo">
+                    <img src="../assets/images/swisstools_logo.png" alt="Logo picture" class="logo-img">
+                    <a href="index.html" class="logo-text">SWISS<span class="highlight">Tools</span></a>
+                </div>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" type="button">
+                    <i class="fas fa-bars" id="menu-icon"></i>
+                </button>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list" id="nav-menu">
+                    <li class="nav-item"><a href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a href="about.html">About Us</a></li>
+                    <li class="nav-item"><a href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a href="faq.html">FAQs/Help</a></li>
+                </ul>
+            </nav>
+            <div class="header-extras">
+                <div class="language-selector">
+                    <i class="fas fa-globe" aria-hidden="true"></i>
+                    <select name="language" id="language" aria-label="Select language">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                    </select>
+                </div>
+                <div class="auth-links">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                    <a href="login.html" aria-label="Login">Login</a>
+                    <span class="separator">|</span>
+                    <a href="register.html" aria-label="Register">Register</a>
+                </div>
+                <div class="cart">
+                    <a href="cart.html" aria-label="View cart">
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                        <span class="cart-text">Cart</span>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" type="button">
-          <i class="fas fa-bars" id="menu-icon"></i>
-        </button>
-      </div>
-      <nav class="nav">
-        <ul class="nav-list" id="nav-menu">
-          <li class="nav-item"><a href="/shop">Shop</a></li>
-          <li class="nav-item"><a href="/about">About Us</a></li>
-          <li class="nav-item"><a href="/contact">Contact</a></li>
-          <li class="nav-item"><a href="/faq">FAQs/Help</a></li>
-        </ul>
-      </nav>
-      <div class="header-extras">
-        <div class="language-selector">
-          <i class="fas fa-globe" aria-hidden="true"></i>
-          <select name="language" id="language" aria-label="Select language">
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-            <option value="fr">French</option>
-          </select>
+    </header>
+
+    <!-- The Shop Layout -->
+    <section class="shop-layout">
+        <div class="container shop-container">
+            <aside class="filter-sidebar">
+                <h2 class="filter-title">Filters</h2>
+                <div class="filter-group">
+                    <h3>View Mode</h3>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="gridView" aria-label="Grid view" type="button"><i
+                                class="fas fa-th"></i></button>
+                        <button class="view-btn" id="listView" aria-label="List view" type="button"><i
+                                class="fas fa-list"></i></button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h3>Price Range</h3>
+                    <div class="price-slider">
+                        <input type="range" id="priceMin" min="0" max="500" value="0" aria-label="Minimum price">
+                        <input type="range" id="priceMax" min="0" max="500" value="500" aria-label="Maximum price">
+                        <div class="price-values">
+                            <span id="minPrice">$0</span> - <span id="maxPrice">$500</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h3>Category</h3>
+                    <select id="categoryFilter" aria-label="Filter by category">
+                        <option value="all">All Categories</option>
+                        <option value="hand-tools">Hand Tools</option>
+                        <option value="power-tools">Power Tools</option>
+                        <option value="measuring-tools">Measuring Tools</option>
+                        <option value="safety-gear">Safety Gear</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Brand</h3>
+                    <select id="brandFilter" aria-label="Filter by brand">
+                        <option value="all">All Brands</option>
+                        <option value="ingco">Ingco</option>
+                        <option value="dewalt">DeWalt</option>
+                        <option value="makita">Makita</option>
+                        <option value="bosch">Bosch</option>
+                        <option value="milwaukee">Milwaukee</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Rating</h3>
+                    <select id="ratingFilter" aria-label="Filter by rating">
+                        <option value="all">All Ratings</option>
+                        <option value="4">4 Stars &amp; Up</option>
+                        <option value="3">3 Stars &amp; Up</option>
+                        <option value="2">2 Stars &amp; Up</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3>Sort By</h3>
+                    <select id="sortPrice" aria-label="Sort by">
+                        <option value="default">Default</option>
+                        <option value="low-high">Price: Low to High</option>
+                        <option value="high-low">Price: High to Low</option>
+                        <option value="trending">Trending</option>
+                        <option value="best-selling">Best Selling</option>
+                        <option value="new-arrivals">New Arrivals</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+                <button class="reset-filters" id="resetFilters" aria-label="Reset filters" type="button">Reset
+                    Filters</button>
+            </aside>
+            <div class="products-container">
+                <div class="shop-controls">
+                    <div class="search-wrapper">
+                        <input type="text" id="searchInput" placeholder="Search tools..." aria-label="Search products">
+                        <div class="autocomplete" id="autocomplete"></div>
+                    </div>
+                    <div class="filter-summary" id="filterSummary"></div>
+                </div>
+                <div class="spinner" id="spinner"></div>
+                <div class="product-grid" id="productGrid">
+                    <div class="product-item" data-category="hand-tools" data-brand="ingco"
+                        data-name="Precision Screwdriver Set" data-price="19.99" data-trending="true" data-new="false"
+                        data-best="false" data-rating="4.5" data-specs="Weight: 0.5kg, Pieces: 6">
+                        <span class="badge trending">Trending</span>
+                        <img src="assets/images/product1.png" alt="Precision Screwdriver Set" loading="lazy">
+                        <h2 class="product-name"><a href="product.html" class="product-link">Precision Screwdriver Set</a></h2>
+                        <p class="brand">Ingco</p>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span> <span>(4.5)</span>
+                        </div>
+                        <p class="price">$19.99</p>
+                        <div class="product-actions">
+                            <button type="button" class="add-to-cart"
+                                aria-label="Add Precision Screwdriver Set to cart">Add toCart</button>
+                            <button type="button" class="quick-view"
+                                aria-label="Quick view Precision Screwdriver Set"><i class="fas fa-eye"></i></button>
+                            <button type="button" class="wishlist"
+                                aria-label="Add Precision Screwdriver Set to wishlist"><i
+                                    class="fas fa-heart"></i></button>
+                            <button type="button" class="compare" aria-label="Compare Precision Screwdriver Set"><i
+                                    class="fas fa-balance-scale"></i></button>
+                        </div>
+                        <div class="tooltip"></div>
+                    </div>
+                    <div class="product-item" data-category="power-tools" data-brand="makita" data-name="Cordless Drill"
+                        data-price="89.99" data-trending="false" data-new="true" data-best="true" data-rating="4.8"
+                        data-specs="Weight: 1.8kg, Power: 18V">
+                        <span class="badge new">New</span>
+                        <span class="badge best">Best Seller</span>
+                        <img src="assets/images/product2.png" alt="Cordless Drill" loading="lazy">
+                        <h2 class="product-name"><a href="product.html" class="product-link">Cordless Drill</a></h2>
+                        <p class="brand">Makita</p>
+                        <div class="rating">
+                            <span class="stars">★★★★★</span> <span>(4.8)</span>
+                        </div>
+                        <p class="price">$89.99</p>
+                        <div class="product-actions">
+                            <button type="button" class="add-to-cart" aria-label="Add Cordless Drill to cart">Add to
+                                Cart</button>
+                            <button type="button" class="quick-view" aria-label="Quick view Cordless Drill"><i
+                                    class="fas fa-eye"></i></button>
+                            <button type="button" class="wishlist" aria-label="Add Cordless Drill to wishlist"><i
+                                    class="fas fa-heart"></i></button>
+                            <button type="button" class="compare" aria-label="Compare Cordless Drill"><i
+                                    class="fas fa-balance-scale"></i></button>
+                        </div>
+                        <div class="tooltip"></div>
+                    </div>
+                    <div class="product-item" data-category="measuring-tools" data-brand="bosch"
+                        data-name="Laser Measure" data-price="49.99" data-trending="true" data-new="false"
+                        data-best="false" data-rating="4.2" data-specs="Range: 50m, Accuracy: ±1.5mm">
+                        <span class="badge trending">Trending</span>
+                        <img src="assets/images/product3.jpeg" alt="Laser Measure" loading="lazy">
+                        <h2 class="product-name"><a href="product.html" class="product-link">Laser Measure</a></h2>
+                        <p class="brand">Bosch</p>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span> <span>(4.2)</span>
+                        </div>
+                        <p class="price">$49.99</p>
+                        <div class="product-actions">
+                            <button type="button" class="add-to-cart" aria-label="Add Laser Measure to cart">Add to
+                                Cart</button>
+                            <button type="button" class="quick-view" aria-label="Quick view Laser Measure"><i
+                                    class="fas fa-eye"></i></button>
+                            <button type="button" class="wishlist" aria-label="Add Laser Measure to wishlist"><i
+                                    class="fas fa-heart"></i></button>
+                            <button type="button" class="compare" aria-label="Compare Laser Measure"><i
+                                    class="fas fa-balance-scale"></i></button>
+                        </div>
+                        <div class="tooltip"></div>
+                    </div>
+                    <div class="product-item" data-category="safety-gear" data-brand="milwaukee"
+                        data-name="Safety Goggles" data-price="14.99" data-trending="false" data-new="true"
+                        data-best="true" data-rating="4.0" data-specs="Material: Polycarbonate, Anti-Fog: Yes">
+                        <span class="badge new">New</span>
+                        <span class="badge best">Best Seller</span>
+                        <img src="assets/images/product4.jpeg" alt="Safety Goggles" loading="lazy">
+                        <h2 class="product-name"><a href="product.html" class="product-link">Safety Goggles</a></h2>
+                        <p class="brand">Milwaukee</p>
+                        <div class="rating">
+                            <span class="stars">★★★★☆</span> <span>(4.0)</span>
+                        </div>
+                        <p class="price">$14.99</p>
+                        <div class="product-actions">
+                            <button type="button" class="add-to-cart" aria-label="Add Safety Goggles to cart">Add to Cart</button>
+                            <button type="button" class="quick-view" aria-label="Quick view Safety Goggles"><i
+                                    class="fas fa-eye"></i></button>
+                            <button type="button" class="wishlist" aria-label="Add Safety Goggles to wishlist"><i
+                                    class="fas fa-heart"></i></button>
+                            <button type="button" class="compare" aria-label="Compare Safety Goggles"><i
+                                    class="fas fa-balance-scale"></i></button>
+                        </div>
+                        <div class="tooltip"></div>
+                    </div>
+                </div>
+                <p id="noResults" aria-live="polite">No results found.</p>
+                <div class="pagination" id="pagination"></div>
+                <div class="recently-viewed">
+                    <h2>Recently Viewed</h2>
+                    <div class="recently-viewed-grid" id="recentlyViewed"></div>
+                </div>
+            </div>
         </div>
-        <div class="auth-links">
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <a href="/login" aria-label="Login">Login</a>
-          <span class="separator">|</span>
-          <a href="/signup" aria-label="Register">Register</a>
+    </section>
+
+    <!-- QuickViewModal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close quick view modal" type="button">×</button>
+            <img id="modalImage" src="assets/images/product5.jpg" alt="Product image" loading="lazy">
+            <h2 id="modalName"></h2>
+            <p id="modalBrand"></p>
+            <div class="rating" id="modalRating"></div>
+            <p id="modalPrice"></p>
+            <p id="modalDescription"></p>
+            <button class="add-to-cart" id="modalAddToCart" aria-label="Add to cart" type="button">Add to Cart</button>
         </div>
-        <div class="cart">
-          <a href="/cart" aria-label="View cart">
-            <i class="fas fa-shopping-cart" aria-hidden="true"></i>
-            <span class="cart-text">Cart</span>
-            <span class="cart-count" id="cart-count">0</span>
-          </a>
-        </div>
-      </div>
     </div>
-  </header>
-  <!-- The Shop Layout -->
-  <section class="shop-layout">
-    <div class="container shop-container">
-      <aside class="filter-sidebar">
-        <h2 class="filter-title">Filters</h2>
-        <div class="filter-group">
-          <h3>View Mode</h3>
-          <div class="view-toggle">
-            <button class="view-btn active" id="gridView" aria-label="Grid view" type="button"><i
-                class="fas fa-th"></i></button>
-            <button class="view-btn" id="listView" aria-label="List view" type="button"><i
-                class="fas fa-list"></i></button>
-          </div>
+
+    <!-- Comparison Modal -->
+    <div class="modal" id="compareModal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close compare modal" type="button">×</button>
+            <h2>Compare Products</h2>
+            <div class="compare-table" id="compareTable"></div>
+            <button class="clear-compare" id="clearCompare" aria-label="Clear comparison" type="button">Clear
+                Comparison</button>
         </div>
-        <div class="filter-group">
-          <h3>Price Range</h3>
-          <div class="price-slider">
-            <input type="range" id="priceMin" min="0" max="500" value="0" aria-label="Minimum price">
-            <input type="range" id="priceMax" min="0" max="500" value="500" aria-label="Maximum price">
-            <div class="price-values">
-              <span id="minPrice">$0</span>
-              -
-              <span id="maxPrice">$500</span>
-            </div>
-          </div>
-        </div>
-        <div class="filter-group">
-          <h3>Category</h3>
-          <select id="categoryFilter" aria-label="Filter by category">
-            <option value="all">All Categories</option>
-            <option value="hand-tools">Hand Tools</option>
-            <option value="power-tools">Power Tools</option>
-            <option value="measuring-tools">Measuring Tools</option>
-            <option value="safety-gear">Safety Gear</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <h3>Brand</h3>
-          <select id="brandFilter" aria-label="Filter by brand">
-            <option value="all">All Brands</option>
-            <option value="ingco">Ingco</option>
-            <option value="dewalt">DeWalt</option>
-            <option value="makita">Makita</option>
-            <option value="bosch">Bosch</option>
-            <option value="milwaukee">Milwaukee</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <h3>Rating</h3>
-          <select id="ratingFilter" aria-label="Filter by rating">
-            <option value="all">All Ratings</option>
-            <option value="4">4 Stars &amp; Up</option>
-            <option value="3">3 Stars &amp; Up</option>
-            <option value="2">2 Stars &amp; Up</option>
-          </select>
-        </div>
-        <div class="filter-group">
-          <h3>Sort By</h3>
-          <select id="sortPrice" aria-label="Sort by">
-            <option value="default">Default</option>
-            <option value="low-high">Price: Low to High</option>
-            <option value="high-low">Price: High to Low</option>
-            <option value="trending">Trending</option>
-            <option value="best-selling">Best Selling</option>
-            <option value="new-arrivals">New Arrivals</option>
-            <option value="rating">Highest Rated</option>
-          </select>
-        </div>
-        <button class="reset-filters" id="resetFilters" aria-label="Reset filters" type="button">Reset
-          Filters</button>
-      </aside>
-      <div class="products-container">
-        <div class="shop-controls">
-          <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="Search tools..." aria-label="Search products">
-            <div class="autocomplete" id="autocomplete"></div>
-          </div>
-          <div class="filter-summary" id="filterSummary"></div>
-        </div>
-        <div class="spinner" id="spinner"></div>
-        <div class="product-grid" id="productGrid">
-          <div class="product-item" data-category="hand-tools" data-brand="ingco" data-name="Precision Screwdriver Set"
-            data-price="19.99" data-trending="true" data-new="false" data-best="false" data-rating="4.5"
-            data-specs="Weight: 0.5kg, Pieces: 6">
-            <span class="badge trending">Trending</span>
-            <img src="assets/images/product1.png" alt="Precision Screwdriver Set" loading="lazy">
-            <h2 class="product-name"><a href="/product" class="product-link">Precision Screwdriver Set</a></h2>
-            <p class="brand">Ingco</p>
-            <div class="rating">
-              <span class="stars">★★★★☆</span>
-              <span>(4.5)</span>
-            </div>
-            <p class="price">$19.99</p>
-            <div class="product-actions">
-              <button type="button" class="add-to-cart" aria-label="Add Precision Screwdriver Set to cart">Add
-                toCart</button>
-              <button type="button" class="quick-view" aria-label="Quick view Precision Screwdriver Set"><i
-                  class="fas fa-eye"></i></button>
-              <button type="button" class="wishlist" aria-label="Add Precision Screwdriver Set to wishlist"><i
-                  class="fas fa-heart"></i></button>
-              <button type="button" class="compare" aria-label="Compare Precision Screwdriver Set"><i
-                  class="fas fa-balance-scale"></i></button>
-            </div>
-            <div class="tooltip"></div>
-          </div>
-          <div class="product-item" data-category="power-tools" data-brand="makita" data-name="Cordless Drill"
-            data-price="89.99" data-trending="false" data-new="true" data-best="true" data-rating="4.8"
-            data-specs="Weight: 1.8kg, Power: 18V">
-            <span class="badge new">New</span>
-            <span class="badge best">Best Seller</span>
-            <img src="assets/images/product2.png" alt="Cordless Drill" loading="lazy">
-            <h2 class="product-name"><a href="/product" class="product-link">Cordless Drill</a></h2>
-            <p class="brand">Makita</p>
-            <div class="rating">
-              <span class="stars">★★★★★</span>
-              <span>(4.8)</span>
-            </div>
-            <p class="price">$89.99</p>
-            <div class="product-actions">
-              <button type="button" class="add-to-cart" aria-label="Add Cordless Drill to cart">Add to
-                Cart</button>
-              <button type="button" class="quick-view" aria-label="Quick view Cordless Drill"><i
-                  class="fas fa-eye"></i></button>
-              <button type="button" class="wishlist" aria-label="Add Cordless Drill to wishlist"><i
-                  class="fas fa-heart"></i></button>
-              <button type="button" class="compare" aria-label="Compare Cordless Drill"><i
-                  class="fas fa-balance-scale"></i></button>
-            </div>
-            <div class="tooltip"></div>
-          </div>
-          <div class="product-item" data-category="measuring-tools" data-brand="bosch" data-name="Laser Measure"
-            data-price="49.99" data-trending="true" data-new="false" data-best="false" data-rating="4.2"
-            data-specs="Range: 50m, Accuracy: ±1.5mm">
-            <span class="badge trending">Trending</span>
-            <img src="assets/images/product3.jpeg" alt="Laser Measure" loading="lazy">
-            <h2 class="product-name"><a href="/product" class="product-link">Laser Measure</a></h2>
-            <p class="brand">Bosch</p>
-            <div class="rating">
-              <span class="stars">★★★★☆</span>
-              <span>(4.2)</span>
-            </div>
-            <p class="price">$49.99</p>
-            <div class="product-actions">
-              <button type="button" class="add-to-cart" aria-label="Add Laser Measure to cart">Add to
-                Cart</button>
-              <button type="button" class="quick-view" aria-label="Quick view Laser Measure"><i
-                  class="fas fa-eye"></i></button>
-              <button type="button" class="wishlist" aria-label="Add Laser Measure to wishlist"><i
-                  class="fas fa-heart"></i></button>
-              <button type="button" class="compare" aria-label="Compare Laser Measure"><i
-                  class="fas fa-balance-scale"></i></button>
-            </div>
-            <div class="tooltip"></div>
-          </div>
-          <div class="product-item" data-category="safety-gear" data-brand="milwaukee" data-name="Safety Goggles"
-            data-price="14.99" data-trending="false" data-new="true" data-best="true" data-rating="4.0"
-            data-specs="Material: Polycarbonate, Anti-Fog: Yes">
-            <span class="badge new">New</span>
-            <span class="badge best">Best Seller</span>
-            <img src="assets/images/product4.jpeg" alt="Safety Goggles" loading="lazy">
-            <h2 class="product-name"><a href="/product" class="product-link">Safety Goggles</a></h2>
-            <p class="brand">Milwaukee</p>
-            <div class="rating">
-              <span class="stars">★★★★☆</span>
-              <span>(4.0)</span>
-            </div>
-            <p class="price">$14.99</p>
-            <div class="product-actions">
-              <button type="button" class="add-to-cart" aria-label="Add Safety Goggles to cart">Add to Cart</button>
-              <button type="button" class="quick-view" aria-label="Quick view Safety Goggles"><i
-                  class="fas fa-eye"></i></button>
-              <button type="button" class="wishlist" aria-label="Add Safety Goggles to wishlist"><i
-                  class="fas fa-heart"></i></button>
-              <button type="button" class="compare" aria-label="Compare Safety Goggles"><i
-                  class="fas fa-balance-scale"></i></button>
-            </div>
-            <div class="tooltip"></div>
-          </div>
-        </div>
-        <p id="noResults" aria-live="polite">No results found.</p>
-        <div class="pagination" id="pagination"></div>
-        <div class="recently-viewed">
-          <h2>Recently Viewed</h2>
-          <div class="recently-viewed-grid" id="recentlyViewed"></div>
-        </div>
-      </div>
     </div>
-  </section>
-  <!-- QuickViewModal -->
-  <div class="modal" id="quickViewModal">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Close quick view modal" type="button">×</button>
-      <img id="modalImage" src="assets/images/product5.jpg" alt="Product image" loading="lazy">
-      <h2 id="modalName"></h2>
-      <p id="modalBrand"></p>
-      <div class="rating" id="modalRating"></div>
-      <p id="modalPrice"></p>
-      <p id="modalDescription"></p>
-      <button class="add-to-cart" id="modalAddToCart" aria-label="Add to cart" type="button">Add to Cart</button>
-    </div>
-  </div>
-  <!-- Comparison Modal -->
-  <div class="modal" id="compareModal">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Close compare modal" type="button">×</button>
-      <h2>Compare Products</h2>
-      <div class="compare-table" id="compareTable"></div>
-      <button class="clear-compare" id="clearCompare" aria-label="Clear comparison" type="button">Clear
-        Comparison</button>
-    </div>
-  </div>
-  <script src="assets/js/shop.js"></script>
+
+    <script src="assets/js/shop.js"></script>
 </body>
 
 </html>
