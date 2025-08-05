@@ -47,7 +47,7 @@ function handleMainImageUpload() {
   const mainImagePreview = document.querySelector("#main-image-preview");
   const mainImageInput = document.querySelector("#mainImage");
 
-  if (!mainImageInput || mainImagePreview) {
+  if (!mainImageInput || !mainImagePreview) {
     console.error("Error: #mainImage or #mainImagePreview not found");
     return;
   }
@@ -196,7 +196,7 @@ function handleImageUploads() {
     // Update input files to reflect allFiles
     const dataTransfer = new DataTransfer();
     allFiles.forEach(f => dataTransfer.items.add(f));
-    imageInput.files = dataTransfer.files;
+    //    imageInput.files = dataTransfer.files;
 
     trackEvent("image_input", { file_count: allFiles.length });
   });
@@ -427,21 +427,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const price = document.querySelector("#price")?.value;
         const category = document.querySelector("#category")?.value;
         const stock = document.querySelector("#stock")?.value;
-        const mainImage = document.querySelector("#mainImage")?.files[0] || [];
-        const thumbnails = document.querySelector("#image")?.files || [];
-        const keyFeatures = Array.from(document.querySelectorAll("#key-features input")).map(input => input.value.trim()).filter(val => val);
-        const whatsInBox = Array.from(document.querySelectorAll("#whats-in-box input")).map(input => input.value.trim()).filter(val => val);
+        const mainImage = document.querySelector("#mainImage")?.files[0];
+        const thumbnails = document.querySelector("#image")?.files;
+        const keyFeatures = Array.from(document.querySelectorAll("#key-features input")).map(input => input.value.trim()).filter(val => val) || [document.querySelector("#key-features input").value];
+        const whatsInBox = Array.from(document.querySelectorAll("#whats-in-box input")).map(input => input.value.trim()).filter(val => val) || [document.querySelector("whats-in-box input").value];
         const productDetails = document.querySelector("#product-details")?.value;
 
 
         const formData = new FormData();
         formData.append("name", productName);
-        formData.append("Description", description);
+        formData.append("description", description);
         formData.append("price", price);
         formData.append("category", category);
         formData.append("stock", stock);
         formData.append("mainImage", mainImage);
-        formData.append("thumbnails", thumbnails);
+        for (let i = 0; i < thumbnails.length; i++) {
+          formData.append("thumbnails", thumbnails[i]);
+        }
         formData.append("keyFeatures", JSON.stringify(keyFeatures));
         formData.append("whatsInBox", JSON.stringify(whatsInBox));
         formData.append("productDetails", productDetails);

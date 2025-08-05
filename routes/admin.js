@@ -32,7 +32,7 @@ router.get("/product", isAdmin, (req, res) => {
 
 router.get("/categories", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "admin", "categories.html"));
-})
+});
 
 router.get("/view_category", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "admin", "view_category.html"));
@@ -62,5 +62,8 @@ router.get("/edit_product", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "admin", "edit_product.html"));
 });
 
+router.get("/chat", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "chat.html"));
+})
 
 module.exports = router;

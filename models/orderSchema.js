@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-{ id: "#O002", customer: "Jane Smith", date: "2025-07-04", category: "tools", amount: 300, status: "shipped" },
 const orderSchema = mongoose.Schema({
   status: {
     type: String,

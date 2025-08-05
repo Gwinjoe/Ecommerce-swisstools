@@ -28,7 +28,7 @@ const productSchema = mongoose.Schema({
         type: String,
         required: [true, "An Image is required for the product"],
       },
-      productId: {
+      publicId: {
         type: String,
         required: [true, "The product id is required"],
       }
@@ -38,7 +38,7 @@ const productSchema = mongoose.Schema({
         type: String,
         required: [true, "An Image is required for the product"],
       },
-      productId: {
+      publicId: {
         type: String,
         required: [true, "The product id is required"],
       }

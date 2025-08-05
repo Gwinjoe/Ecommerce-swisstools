@@ -1,413 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - SWISSTools</title>
-    <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - SWISSTools</title>
+  <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
     function gtag() {dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
-    </script>
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="sticky-header">
-      <div class="container">
-        <div class="logo">
-          <a href="/">SWISS<span class="highlight">Tools</span></a>
-        </div>
-        <div class="menu-toggle">
-          <i class="fas fa-bars menu-icon"></i>
-        </div>
-        <div class="header-extras">
-          <div class="theme-toggle">
-            <button type="button" class="theme-toggle-btn" title="Toggle Theme" data-ga-event="theme_toggle">
-              <i class="fas fa-moon"></i>
-            </button>
-          </div>
-          <div class="language-selector">
-            <button type="button" class="language-toggle" title="Select Language" data-ga-event="language_toggle">
-              <i class="fas fa-globe"></i>
-            </button>
-            <ul class="language-options">
-              <li data-lang="en" data-ga-event="select_language" data-ga-value="en">English</li>
-              <li data-lang="es" data-ga-event="select_language" data-ga-value="es">Español</li>
-              <li data-lang="fr" data-ga-event="select_language" data-ga-value="fr">Français</li>
-            </ul>
-          </div>
-          <div class="notification">
-            <button type="button" class="notification-btn" title="Notifications" data-ga-event="notification_open">
-              <i class="fas fa-bell"></i>
-              <span class="notification-count">2</span>
-            </button>
-          </div>
-          <div class="user-profile">
-            <img src="assets/images/team1.jpeg" alt="Admin Profile" class="profile-img">
-            <div class="profile-info">
-              <span class="profile-name">Admin User</span>
-              <span class="profile-status">Active</span>
-            </div>
-            <ul class="profile-dropdown">
-              <li><a href="/admin" data-ga-event="profile_nav" data-ga-value="dashboard"><i class="fas fa-tachometer-alt"></i>
-                  Dashboard</a></li>
-              <li><a href="/admin/users" data-ga-event="profile_nav" data-ga-value="manage_users"><i class="fas fa-users"></i>
-                  Manage Users</a></li>
-              <li><a href="/admin/categories" data-ga-event="profile_nav" data-ga-value="categories"><i class="fas fa-tags"></i>
-                  Categories</a></li>
-              <li><a href="/admin/logout" data-ga-event="profile_nav" data-ga-value="logout"><i class="fas fa-sign-out-alt"></i>
-                  Logout</a></li>
-            </ul>
-          </div>
-          <div class="settings">
-            <button type="button" class="settings-btn" title="Settings" data-ga-event="settings_open">
-              <i class="fas fa-cog"></i>
-            </button>
-          </div>
-        </div>
+  </script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="sticky-header">
+    <div class="container">
+      <div class="logo">
+        <a href="/">SWISS<span class="highlight">Tools</span></a>
       </div>
-    </header>
-    <!-- Main Container -->
-    <div class="main-container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <ul class="sidebar-list">
-          <li class="sidebar-item"><a href="/admin" class="active" data-ga-event="sidebar_nav" data-ga-value="dashboard"><i class="fas fa-tachometer-alt"></i>
-              Dashboard</a></li>
-          <li class="sidebar-item"><a href="/admin/orders" data-ga-event="sidebar_nav" data-ga-value="view_orders"><i class="fas fa-shopping-bag"></i>
-              View Orders</a></li>
-          <li class="sidebar-item"><a href="/admin/manage_users" data-ga-event="sidebar_nav" data-ga-value="manage_users"><i class="fas fa-users"></i>
-              Manage Users</a></li>
-          <li class="sidebar-item"><a href="/admin/categories" data-ga-event="sidebar_nav" data-ga-value="categories"><i class="fas fa-tags"></i>
-              Categories</a></li>
-          <li class="sidebar-item"><a href="/admin/product" data-ga-event="sidebar_nav" data-ga-value="categories"><i class="fas fa-brands fa-product-hunt"></i>
-              Products</a></li>
-          <li class="sidebar-item"><a href="/admin/add_product" data-ga-event="sidebar_nav" data-ga-value="add_product"><i class="fas fa-plus-circle"></i>
-              Add Product</a></li>
-          <li class="sidebar-item"><a href="/admin/edit_product" data-ga-event="sidebar_nav" data-ga-value="add_product"><i class="fas fa-solid fa-pen-to-square"></i>
-              Edit Product</a></li>
-          <li class="sidebar-item"><a href="/chat" data-ga-event="sidebar_nav" data-ga-value="chat"><i class="fas fa-comments"></i>
-              Chat
-              <span class="unread-count">3</span></a></li>
-          <li class="sidebar-item"><a href="/admin/logout" data-ga-event="sidebar_nav" data-ga-value="logout"><i class="fas fa-sign-out-alt"></i>
-              Logout</a></li>
-        </ul>
-      </aside>
-      <!-- Main Content -->
-      <main class="admin-main">
-        <div class="admin-content">
-          <h1>Admin Dashboard</h1>
-          <!-- Overview -->
-          <section class="overview">
-            <h2>Overview</h2>
-            <div class="overview-cards">
-              <div class="dashboard-card">
-                <i class="fas fa-shopping-bag"></i>
-                <h3>Total Orders</h3>
-                <p data-metric="total-orders">1,234</p>
-                <div class="growth">50%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="total-orders-chart"></canvas>
-              </div>
-              <div class="dashboard-card">
-                <i class="fas fa-box"></i>
-                <h3>Total Products</h3>
-                <p data-metric="total-products">567</p>
-                <div class="growth">45%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="total-products-chart"></canvas>
-              </div>
-              <div class="dashboard-card">
-                <i class="fas fa-users"></i>
-                <h3>Total Users</h3>
-                <p data-metric="total-users">2,890</p>
-                <div class="growth">30%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="total-users-chart"></canvas>
-              </div>
-              <div class="dashboard-card">
-                <i class="fas fa-tags"></i>
-                <h3>Total Categories</h3>
-                <p data-metric="total-categories">45</p>
-                <div class="growth">20%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="total-categories-chart"></canvas>
-              </div>
-              <div class="dashboard-card">
-                <i class="fas fa-dollar-sign"></i>
-                <h3>Revenue</h3>
-                <p data-metric="revenue">$12,345</p>
-                <div class="growth">60%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="revenue-chart"></canvas>
-              </div>
-              <div class="dashboard-card">
-                <i class="fas fa-clock"></i>
-                <h3>Pending Orders</h3>
-                <p data-metric="pending-orders">89</p>
-                <div class="growth">25%
-                  <i class="fas fa-arrow-up"></i></div>
-                <canvas class="metric-chart" data-metric="pending-orders-chart"></canvas>
-              </div>
-            </div>
-          </section>
-          <!-- Overview Charts -->
-          <section class="overview-charts">
-            <h2>Orders Per Day</h2>
-            <div class="chart-container">
-              <canvas id="ordersChart"></canvas>
-            </div>
-          </section>
-          <!-- Recent Orders -->
-          <section class="recent-orders">
-            <h2>Recent Orders</h2>
-            <div class="filters">
-              <div class="filter-row">
-                <div class="filter-group">
-                  <label for="status-filter">Status</label>
-                  <select id="status-filter" multiple data-ga-event="filter_status">
-                    <option value="all">All</option>
-                    <option value="pending">Pending</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label for="category-filter">Category</label>
-                  <select id="category-filter" data-ga-event="filter_category">
-                    <option value="all">All</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="tools">Tools</option>
-                    <option value="materials">Materials</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label for="amount-filter">Amount</label>
-                  <select id="amount-filter" data-ga-event="filter_amount">
-                    <option value="all">All</option>
-                    <option value="0-100">$0 - $100</option>
-                    <option value="100-500">$100 - $500</option>
-                    <option value="500+">$500+</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label for="start-date">Start Date</label>
-                  <input type="date" id="start-date" data-ga-event="filter_date_start">
-                </div>
-                <div class="filter-group">
-                  <label for="end-date">End Date</label>
-                  <input type="date" id="end-date" data-ga-event="filter_date_end">
-                </div>
-                <div class="filter-group">
-                  <label for="search">Search</label>
-                  <input type="text" id="search" placeholder="Order ID or Customer" data-ga-event="filter_search">
-                </div>
-                <div class="filter-group">
-                  <label for="sort-by">Sort By</label>
-                  <select id="sort-by" data-ga-event="filter_sort">
-                    <option value="id-asc">Order ID (Asc)</option>
-                    <option value="id-desc">Order ID (Desc)</option>
-                    <option value="date-asc">Date (Asc)</option>
-                    <option value="date-desc">Date (Desc)</option>
-                    <option value="customer-asc">Customer (Asc)</option>
-                    <option value="customer-desc">Customer (Desc)</option>
-                    <option value="amount-asc">Amount (Asc)</option>
-                    <option value="amount-desc">Amount (Desc)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="filter-actions">
-                <button type="button" class="reset-filters" data-ga-event="reset_filters">Reset
-                Filters</button>
-              </div>
-            </div>
-            <div class="table-container">
-              <table class="orders-table">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-status="pending" data-date="2025-07-05" data-category="electronics" data-amount="150">
-                    <td>#O001</td>
-                    <td>John Doe</td>
-                    <td>2025-07-05</td>
-                    <td>Electronics</td>
-                    <td>$150</td>
-                    <td class="status pending">Pending</td>
-                    <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O001">View</button></td>
-                  </tr>
-                  <tr data-status="shipped" data-date="2025-07-04" data-category="tools" data-amount="300">
-                    <td>#O002</td>
-                    <td>Jane Smith</td>
-                    <td>2025-07-04</td>
-                    <td>Tools</td>
-                    <td>$300</td>
-                    <td class="status shipped">Shipped</td>
-                    <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O002">View</button></td>
-                  </tr>
-                  <tr data-status="delivered" data-date="2025-07-03" data-category="materials" data-amount="450">
-                    <td>#O003</td>
-                    <td>Mike Johnson</td>
-                    <td>2025-07-03</td>
-                    <td>Materials</td>
-                    <td>$450</td>
-                    <td class="status delivered">Delivered</td>
-                    <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O003">View</button></td>
-                  </tr>
-                  <tr data-status="pending" data-date="2025-07-02" data-category="electronics" data-amount="200">
-                    <td>#O004</td>
-                    <td>Emily Davis</td>
-                    <td>2025-07-02</td>
-                    <td>Electronics</td>
-                    <td>$200</td>
-                    <td class="status pending">Pending</td>
-                    <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O004">View</button></td>
-                  </tr>
-                  <tr data-status="shipped" data-date="2025-07-01" data-category="tools" data-amount="120">
-                    <td>#O005</td>
-                    <td>Chris Brown</td>
-                    <td>2025-07-01</td>
-                    <td>Tools</td>
-                    <td>$120</td>
-                    <td class="status shipped">Shipped</td>
-                    <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O005">View</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-          <!-- Quick Actions -->
-          <section class="quick-actions">
-            <h2>Quick Actions</h2>
-            <div class="actions-container">
-              <a href="/admin/add_product" class="action-btn" data-ga-event="quick_action" data-ga-value="add_product">Add
-              Product</a>
-              <a href="/admin/manage_users" class="action-btn" data-ga-event="quick_action" data-ga-value="users">Manage
-              Users</a>
-              <a href="/admin/categories" class="action-btn" data-ga-event="quick_action" data-ga-value="categories">Manage
-              Categories</a>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
-    <!-- Settings Modal -->
-    <div class="settings-modal">
-      <div class="settings-content">
-        <h2>Settings</h2>
-        <div class="settings-form">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Enter your name">
-            <div class="error-message"></div>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email">
-            <div class="error-message"></div>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter new password">
-            <div class="error-message"></div>
-          </div>
-          <div class="form-actions">
-            <button type="button" class="close-settings" data-ga-event="settings_close">Close</button>
-            <button type="button" class="save-settings" data-ga-event="settings_save">Save</button>
-          </div>
-        </div>
+      <div class="menu-toggle">
+        <i class="fas fa-bars menu-icon"></i>
       </div>
-    </div>
-    <!-- Notifications Modal -->
-    <div class="notifications-modal">
-      <div class="notifications-content">
-        <h2>Notifications</h2>
-        <div class="notifications-body"></div>
-        <div class="form-actions">
-          <button type="button" class="close-notifications" data-ga-event="notifications_close">Close</button>
-          <button type="button" class="clear-notifications" data-ga-event="notifications_clear">Clear</button>
+      <div class="header-extras">
+        <div class="theme-toggle">
+          <button type="button" class="theme-toggle-btn" title="Toggle Theme" data-ga-event="theme_toggle">
+            <i class="fas fa-moon"></i>
+          </button>
         </div>
-      </div>
-    </div>
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="footer-container">
-        <div class="footer-column animate-fade">
-          <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
-          <p>Your trusted partner in engineering & construction tools.</p>
-          <div class="footer-contact">
-            <p><i class="fas fa-map-marker-alt"></i>
-              5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
-            <p><i class="fas fa-phone-alt"></i>
-              +234 913 232 8654</p>
-            <p><i class="fas fa-envelope"></i>
-              support@swisstools.store</p>
-          </div>
-        </div>
-        <div class="footer-column animate-fade">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="/admin/add_product" data-ga-event="footer_nav" data-ga-value="add_product">Add
-              Product</a></li>
-            <li><a href="/admin/view_orders" data-ga-event="footer_nav" data-ga-value="view_orders">View
-              Orders</a></li>
-            <li><a href="/admin/manage_users" data-ga-event="footer_nav" data-ga-value="manage_users">Manage
-              Users</a></li>
-            <li><a href="/admin/categories" data-ga-event="footer_nav" data-ga-value="categories">Categories</a></li>
+        <div class="language-selector">
+          <button type="button" class="language-toggle" title="Select Language" data-ga-event="language_toggle">
+            <i class="fas fa-globe"></i>
+          </button>
+          <ul class="language-options">
+            <li data-lang="en" data-ga-event="select_language" data-ga-value="en">English</li>
+            <li data-lang="es" data-ga-event="select_language" data-ga-value="es">Español</li>
+            <li data-lang="fr" data-ga-event="select_language" data-ga-value="fr">Français</li>
           </ul>
         </div>
-        <div class="footer-column animate-fade">
-          <h4>Stay Updated</h4>
-          <p>Subscribe to get updates & offers.</p>
-          <div class="footer-newsletter">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="button" data-ga-event="newsletter_subscribe">
-              <span class="visually-hidden"></span>
-              <i class="fas fa-paper-plane"></i>
-            </button>
+        <div class="notification">
+          <button type="button" class="notification-btn" title="Notifications" data-ga-event="notification_open">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">2</span>
+          </button>
+        </div>
+        <div class="user-profile">
+          <img src="assets/images/team1.jpeg" alt="Admin Profile" class="profile-img">
+          <div class="profile-info">
+            <span class="profile-name">Admin User</span>
+            <span class="profile-status">Active</span>
           </div>
-          <div class="footer-socials">
-            <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="facebook"><i class="fab fa-facebook-f"></i><span class="visually-hidden"></span></a>
-            <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="instagram"><i class="fab fa-instagram"></i><span class="visually-hidden"></span></a>
-            <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="twitter"><i class="fab fa-x-twitter"></i><span class="visually-hidden"></span></a>
-            <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="linkedin"><i class="fab fa-linkedin-in"></i><span class="visually-hidden"></span></a>
-          </div>
+          <ul class="profile-dropdown">
+            <li><a href="/admin" data-ga-event="profile_nav" data-ga-value="dashboard"><i
+                  class="fas fa-tachometer-alt"></i>
+                Dashboard</a></li>
+            <li><a href="/admin/users" data-ga-event="profile_nav" data-ga-value="manage_users"><i
+                  class="fas fa-users"></i>
+                Manage Users</a></li>
+            <li><a href="/admin/categories" data-ga-event="profile_nav" data-ga-value="categories"><i
+                  class="fas fa-tags"></i>
+                Categories</a></li>
+            <li><a href="/admin/logout" data-ga-event="profile_nav" data-ga-value="logout"><i
+                  class="fas fa-sign-out-alt"></i>
+                Logout</a></li>
+          </ul>
+        </div>
+        <div class="settings">
+          <button type="button" class="settings-btn" title="Settings" data-ga-event="settings_open">
+            <i class="fas fa-cog"></i>
+          </button>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>©
-          <span class="year"></span>
-          SWISSTools. All rights reserved.</p>
+    </div>
+  </header>
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-list">
+        <li class="sidebar-item"><a href="/admin" class="active" data-ga-event="sidebar_nav"
+            data-ga-value="dashboard"><i class="fas fa-tachometer-alt"></i>
+            Dashboard</a></li>
+        <li class="sidebar-item"><a href="/admin/orders" data-ga-event="sidebar_nav" data-ga-value="view_orders"><i
+              class="fas fa-shopping-bag"></i>
+            View Orders</a></li>
+        <li class="sidebar-item"><a href="/admin/manage_users" data-ga-event="sidebar_nav"
+            data-ga-value="manage_users"><i class="fas fa-users"></i>
+            Manage Users</a></li>
+        <li class="sidebar-item"><a href="/admin/categories" data-ga-event="sidebar_nav" data-ga-value="categories"><i
+              class="fas fa-tags"></i>
+            Categories</a></li>
+        <li class="sidebar-item"><a href="/admin/product" data-ga-event="sidebar_nav" data-ga-value="categories"><i
+              class="fas fa-brands fa-product-hunt"></i>
+            Products</a></li>
+        <li class="sidebar-item"><a href="/admin/add_product" data-ga-event="sidebar_nav" data-ga-value="add_product"><i
+              class="fas fa-plus-circle"></i>
+            Add Product</a></li>
+        <li class="sidebar-item"><a href="/admin/chat" data-ga-event="sidebar_nav" data-ga-value="chat"><i
+              class="fas fa-comments"></i>
+            Chat
+            <span class="unread-count">3</span></a></li>
+        <li class="sidebar-item"><a href="/admin/logout" data-ga-event="sidebar_nav" data-ga-value="logout"><i
+              class="fas fa-sign-out-alt"></i>
+            Logout</a></li>
+      </ul>
+    </aside>
+    <!-- Main Content -->
+    <main class="admin-main">
+      <div class="admin-content">
+        <h1>Admin Dashboard</h1>
+        <!-- Overview -->
+        <section class="overview">
+          <h2>Overview</h2>
+          <div class="overview-cards">
+            <div class="dashboard-card">
+              <i class="fas fa-shopping-bag"></i>
+              <h3>Total Orders</h3>
+              <p data-metric="total-orders">1,234</p>
+              <div class="growth">50%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="total-orders-chart"></canvas>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-box"></i>
+              <h3>Total Products</h3>
+              <p data-metric="total-products">567</p>
+              <div class="growth">45%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="total-products-chart"></canvas>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-users"></i>
+              <h3>Total Users</h3>
+              <p data-metric="total-users">2,890</p>
+              <div class="growth">30%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="total-users-chart"></canvas>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-tags"></i>
+              <h3>Total Categories</h3>
+              <p data-metric="total-categories">45</p>
+              <div class="growth">20%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="total-categories-chart"></canvas>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-dollar-sign"></i>
+              <h3>Revenue</h3>
+              <p data-metric="revenue">$12,345</p>
+              <div class="growth">60%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="revenue-chart"></canvas>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-clock"></i>
+              <h3>Pending Orders</h3>
+              <p data-metric="pending-orders">89</p>
+              <div class="growth">25%
+                <i class="fas fa-arrow-up"></i>
+              </div>
+              <canvas class="metric-chart" data-metric="pending-orders-chart"></canvas>
+            </div>
+          </div>
+        </section>
+        <!-- Overview Charts -->
+        <section class="overview-charts">
+          <h2>Orders Per Day</h2>
+          <div class="chart-container">
+            <canvas id="ordersChart"></canvas>
+          </div>
+        </section>
+        <!-- Recent Orders -->
+        <section class="recent-orders">
+          <h2>Recent Orders</h2>
+          <div class="filters">
+            <div class="filter-row">
+              <div class="filter-group">
+                <label for="status-filter">Status</label>
+                <select id="status-filter" multiple data-ga-event="filter_status">
+                  <option value="all">All</option>
+                  <option value="pending">Pending</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="delivered">Delivered</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="category-filter">Category</label>
+                <select id="category-filter" data-ga-event="filter_category">
+                  <option value="all">All</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="tools">Tools</option>
+                  <option value="materials">Materials</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="amount-filter">Amount</label>
+                <select id="amount-filter" data-ga-event="filter_amount">
+                  <option value="all">All</option>
+                  <option value="0-100">$0 - $100</option>
+                  <option value="100-500">$100 - $500</option>
+                  <option value="500+">$500+</option>
+                </select>
+              </div>
+              <div class="filter-group">
+                <label for="start-date">Start Date</label>
+                <input type="date" id="start-date" data-ga-event="filter_date_start">
+              </div>
+              <div class="filter-group">
+                <label for="end-date">End Date</label>
+                <input type="date" id="end-date" data-ga-event="filter_date_end">
+              </div>
+              <div class="filter-group">
+                <label for="search">Search</label>
+                <input type="text" id="search" placeholder="Order ID or Customer" data-ga-event="filter_search">
+              </div>
+              <div class="filter-group">
+                <label for="sort-by">Sort By</label>
+                <select id="sort-by" data-ga-event="filter_sort">
+                  <option value="id-asc">Order ID (Asc)</option>
+                  <option value="id-desc">Order ID (Desc)</option>
+                  <option value="date-asc">Date (Asc)</option>
+                  <option value="date-desc">Date (Desc)</option>
+                  <option value="customer-asc">Customer (Asc)</option>
+                  <option value="customer-desc">Customer (Desc)</option>
+                  <option value="amount-asc">Amount (Asc)</option>
+                  <option value="amount-desc">Amount (Desc)</option>
+                </select>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button type="button" class="reset-filters" data-ga-event="reset_filters">Reset
+                Filters</button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Category</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-status="pending" data-date="2025-07-05" data-category="electronics" data-amount="150">
+                  <td>#O001</td>
+                  <td>John Doe</td>
+                  <td>2025-07-05</td>
+                  <td>Electronics</td>
+                  <td>$150</td>
+                  <td class="status pending">Pending</td>
+                  <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O001">View</button></td>
+                </tr>
+                <tr data-status="shipped" data-date="2025-07-04" data-category="tools" data-amount="300">
+                  <td>#O002</td>
+                  <td>Jane Smith</td>
+                  <td>2025-07-04</td>
+                  <td>Tools</td>
+                  <td>$300</td>
+                  <td class="status shipped">Shipped</td>
+                  <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O002">View</button></td>
+                </tr>
+                <tr data-status="delivered" data-date="2025-07-03" data-category="materials" data-amount="450">
+                  <td>#O003</td>
+                  <td>Mike Johnson</td>
+                  <td>2025-07-03</td>
+                  <td>Materials</td>
+                  <td>$450</td>
+                  <td class="status delivered">Delivered</td>
+                  <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O003">View</button></td>
+                </tr>
+                <tr data-status="pending" data-date="2025-07-02" data-category="electronics" data-amount="200">
+                  <td>#O004</td>
+                  <td>Emily Davis</td>
+                  <td>2025-07-02</td>
+                  <td>Electronics</td>
+                  <td>$200</td>
+                  <td class="status pending">Pending</td>
+                  <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O004">View</button></td>
+                </tr>
+                <tr data-status="shipped" data-date="2025-07-01" data-category="tools" data-amount="120">
+                  <td>#O005</td>
+                  <td>Chris Brown</td>
+                  <td>2025-07-01</td>
+                  <td>Tools</td>
+                  <td>$120</td>
+                  <td class="status shipped">Shipped</td>
+                  <td><button class="view-order-btn" data-ga-event="view_order" data-ga-value="#O005">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+          <h2>Quick Actions</h2>
+          <div class="actions-container">
+            <a href="/admin/add_product" class="action-btn" data-ga-event="quick_action" data-ga-value="add_product">Add
+              Product</a>
+            <a href="/admin/manage_users" class="action-btn" data-ga-event="quick_action" data-ga-value="users">Manage
+              Users</a>
+            <a href="/admin/categories" class="action-btn" data-ga-event="quick_action"
+              data-ga-value="categories">Manage
+              Categories</a>
+          </div>
+        </section>
       </div>
-      <button type="button" class="scroll-top-btn" title="Go to top" data-ga-event="scroll_top">
-        <span class="visually-hidden"></span>
-        <i class="fas fa-arrow-up"></i>
-      </button>
-    </footer>
-    <!-- GSAP and ScrollTrigger -->
-    <script type="importmap">
+    </main>
+  </div>
+  <!-- Settings Modal -->
+  <div class="settings-modal">
+    <div class="settings-content">
+      <h2>Settings</h2>
+      <div class="settings-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name">
+          <div class="error-message"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          <div class="error-message"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter new password">
+          <div class="error-message"></div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="close-settings" data-ga-event="settings_close">Close</button>
+          <button type="button" class="save-settings" data-ga-event="settings_save">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Notifications Modal -->
+  <div class="notifications-modal">
+    <div class="notifications-content">
+      <h2>Notifications</h2>
+      <div class="notifications-body"></div>
+      <div class="form-actions">
+        <button type="button" class="close-notifications" data-ga-event="notifications_close">Close</button>
+        <button type="button" class="clear-notifications" data-ga-event="notifications_clear">Clear</button>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column animate-fade">
+        <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
+        <p>Your trusted partner in engineering & construction tools.</p>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i>
+            5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
+          <p><i class="fas fa-phone-alt"></i>
+            +234 913 232 8654</p>
+          <p><i class="fas fa-envelope"></i>
+            support@swisstools.store</p>
+        </div>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/admin/add_product" data-ga-event="footer_nav" data-ga-value="add_product">Add
+              Product</a></li>
+          <li><a href="/admin/view_orders" data-ga-event="footer_nav" data-ga-value="view_orders">View
+              Orders</a></li>
+          <li><a href="/admin/manage_users" data-ga-event="footer_nav" data-ga-value="manage_users">Manage
+              Users</a></li>
+          <li><a href="/admin/categories" data-ga-event="footer_nav" data-ga-value="categories">Categories</a></li>
+        </ul>
+      </div>
+      <div class="footer-column animate-fade">
+        <h4>Stay Updated</h4>
+        <p>Subscribe to get updates & offers.</p>
+        <div class="footer-newsletter">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="button" data-ga-event="newsletter_subscribe">
+            <span class="visually-hidden"></span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="facebook"><i
+              class="fab fa-facebook-f"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="instagram"><i
+              class="fab fa-instagram"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="twitter"><i
+              class="fab fa-x-twitter"></i><span class="visually-hidden"></span></a>
+          <a href="#" class="social-icon" data-ga-event="social_click" data-ga-value="linkedin"><i
+              class="fab fa-linkedin-in"></i><span class="visually-hidden"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>©
+        <span class="year"></span>
+        SWISSTools. All rights reserved.
+      </p>
+    </div>
+    <button type="button" class="scroll-top-btn" title="Go to top" data-ga-event="scroll_top">
+      <span class="visually-hidden"></span>
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </footer>
+  <!-- GSAP and ScrollTrigger -->
+  <script type="importmap">
       {"imports":{"gsap":"https://cdn.skypack.dev/gsap","gsap/ScrollTrigger":"https://cdn.skypack.dev/gsap/ScrollTrigger"}}
     </script>
-    <script type="module" src="../assets/js/admin_dashboard.js"></script>
-  </body>
+  <script type="module" src="../assets/js/admin_dashboard.js"></script>
+</body>
+
 </html>
