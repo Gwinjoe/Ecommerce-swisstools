@@ -451,8 +451,23 @@ document.addEventListener("DOMContentLoaded", () => {
           ease: "power3.in",
           stagger: 0.1,
           onComplete: async () => {
-            rows.forEach(row => row.remove());
-            mockProducts = mockProducts.filter(product => !selectedIds.includes(product._id));
+            // rows.forEach(row => row.remove());
+            // mockProducts = mockProducts.filter(product => !selectedIds.includes(product._id));
+
+            const body = JSON.stringify({ ids: selectedIds });
+            const response = await fetch("/api/delete_multiple", {
+              method: "POST",
+              body: JSON.stringify({ selectedIds })
+            })
+            const { success, message } = await response.json();
+            console.log(JSON.stringify({ selectedIds }))
+
+            if (success) {
+              showStatusModal("success", message)
+            } else {
+              showStatusModal("failed", message);
+            }
+
             if (currentProducts.length <= (currentPage - 1) * 5) {
               currentPage = Math.max(1, currentPage - 1);
             }
@@ -485,6 +500,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return product;
       });
+
+      const response = await fetch("/api/edit_multiple_categories", {
+        method: "POST",
+        body: JSON.stringify({ selectedIds, category: bulkCategorySelect.value })
+      })
+      const { success, message } = await response.json();
+
+      console.log(JSON.stringify({ selectedIds, category: bulkCategorySelect.value }));
+
+      if (success) {
+        showStatusModal("success", message);
+      } else {
+        showStatusModal("failed", message);
+      }
+
       const { products } = await renderProducts(currentPage, currentSort, currentFilter, currentSearch);
       currentProducts = products;
       trackEvent("bulk_assign_category", { category: bulkCategorySelect.value, product_ids: selectedIds });

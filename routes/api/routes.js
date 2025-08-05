@@ -1,6 +1,7 @@
+
 const express = require("express");
 const router = express.Router();
-const { get_product_by_id, edit_product, delete_product, getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category, add_product } = require("../../controllers/productController")
+const { delete_multiple_products, edit_multiple_categories, get_product_by_id, edit_product, delete_product, getProducts, add_category, get_categories, edit_category, get_category_by_id, delete_category, add_product } = require("../../controllers/productController")
 const passport = require("passport");
 const { signup, signout, adminSignout } = require("../../controllers/authController")
 const { get_users, get_user_by_id, edit_user, delete_user, user_count, add_user } = require("../../controllers/userController")
@@ -8,10 +9,10 @@ const path = require("path");
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "..", "..", "tmp", "uploads")); // Specify the destination folder
+    cb(null, path.join(__dirname, "..", "..", "tmp", "uploads"));
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Customize the filename
+    cb(null, Date.now() + '-' + file.originalname);
   }
 });
 const upload = multer({ storage: storage });
@@ -27,13 +28,16 @@ router.get("/edit_product/:id", get_product_by_id);
 router.post('/add_product',
   upload.fields([
     { name: 'mainImage', maxcount: 1 },
-    { name: 'thumbnails', maxcount: 6 } // up to 6 thumbnails
+    { name: 'thumbnails', maxcount: 6 }
   ]), add_product);
 router.delete("/delete_product/:id", delete_product);
 router.put("/edit_product", upload.fields([
   { name: 'mainImage', maxcount: 1 },
-  { name: 'thumbnails', maxcount: 6 } // up to 6 thumbnails
+  { name: 'thumbnails', maxcount: 6 }
 ]), edit_product);
+router.post("/delete_multiple", delete_multiple_products);
+router.post("edit_multiple_categories", edit_multiple_categories);
+
 
 router.post("/add_category", add_category);
 router.get("/categories", get_categories);
