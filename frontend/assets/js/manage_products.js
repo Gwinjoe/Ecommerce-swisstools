@@ -453,19 +453,13 @@ document.addEventListener("DOMContentLoaded", () => {
           onComplete: async () => {
             // rows.forEach(row => row.remove());
             // mockProducts = mockProducts.filter(product => !selectedIds.includes(product._id));
-            let ids = [];
-            Array.from(selectedCheckboxes).forEach((checkbox) => {
-              ids.push(checkbox.dataset.id)
-            })
-            const body = JSON.stringify({ ids });
-            const alert = JSON.parse(body)
-            alert(alert.ids[0]);
+
             const response = await fetch("/api/delete_multiple", {
               method: "POST",
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: body,
+              body: JSON.stringify({ selectedIds })
             })
             const { success, message } = await response.json();
 

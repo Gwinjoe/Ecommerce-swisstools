@@ -370,15 +370,16 @@ exports.editMultipleProducts = async (req, res) => {
 };
 
 exports.delete_multiple_products = async (req, res) => {
-  const { ids } = req.body;
+  console.log(req.body);
+  const { selectedIds } = req.body;
   try {
-    const productIds = ids ? ids : [];
-    productIds.forEach(async (id) => {
+    const productIds = selectedIds || [];
+    for (const id of productIds) {
       const result = await Product.findByIdAndDelete(id);
       if (!result) {
         return res.status(401).json({ success: false, message: "Couldn't find resource to be deleted" });
       }
-    });
+    }
     res.status(201).json({ success: true, message: "Selected Items Deleted!" });
   } catch (err) {
     if (err) {
