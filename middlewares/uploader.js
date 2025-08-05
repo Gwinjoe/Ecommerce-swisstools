@@ -1,6 +1,6 @@
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
-const { default: pLimit } = import("p-limit");
+const { default: pLimit } = require("p-limit");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

@@ -453,14 +453,18 @@ document.addEventListener("DOMContentLoaded", () => {
           onComplete: async () => {
             // rows.forEach(row => row.remove());
             // mockProducts = mockProducts.filter(product => !selectedIds.includes(product._id));
-
-            const body = JSON.stringify({ ids: selectedIds });
+            let ids = [];
+            Array.from(selectedCheckboxes).forEach((checkbox) => {
+              ids.push(checkbox.dataset.id)
+            })
+            const body = JSON.stringify({ ids });
+            const alert = JSON.parse(body)
+            alert(alert.ids[0]);
             const response = await fetch("/api/delete_multiple", {
               method: "POST",
-              body: JSON.stringify({ selectedIds })
+              body: body,
             })
             const { success, message } = await response.json();
-            console.log(JSON.stringify({ selectedIds }))
 
             if (success) {
               showStatusModal("success", message)
@@ -501,13 +505,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return product;
       });
 
-      const response = await fetch("/api/edit_multiple_categories", {
+      alert(selectedIds[0]);
+
+      const response = await fetch("/api/edit_multiple", {
         method: "POST",
-        body: JSON.stringify({ selectedIds, category: bulkCategorySelect.value })
+        body: JSON.stringify({ selectedIds, category: bulkCategorySelect.value }),
       })
       const { success, message } = await response.json();
-
-      console.log(JSON.stringify({ selectedIds, category: bulkCategorySelect.value }));
 
       if (success) {
         showStatusModal("success", message);

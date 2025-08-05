@@ -345,19 +345,29 @@ exports.edit_product = async (req, res) => {
 }
 
 
-exports.edit_multiple_categories = async (req, res) => {
+exports.editMultipleProducts = async (req, res) => {
+  console.log(req.body)
   const { selectedIds, category } = req.body;
   try {
     const productIds = selectedIds ? JSON.parse(selectedIds) : [];
     productIds.forEach(async (id) => {
-      const result = await Product.findByIdAndUpdate({ id }, { category: category });
-      if (!result) {
+      const existingProduct = await Product.findById(id);
+      if (!existingProduct) {
         return res.status(401).json({ success: false, message: "Couldn't find resources to be updated" });
       }
-      res.status(201).json({ success: true, message: "Selected item category updated" });
+
+      if (category) {
+        existingProduct.category = category;
+      } else {
+        res.status(401).json({ success: false, message: "Invalid category Id" })
+      }
+
+      const results = await existingProduct.save();
     })
+    res.status(201).json({ success: true, message: "Selected item category updated" });
   } catch (err) {
     if (err) {
+      console.log(err)
       res.status(500).json({ success: false, message: "Internal Server Error" })
     }
   }
@@ -368,7 +378,7 @@ exports.delete_multiple_products = async (req, res) => {
   try {
     const productIds = ids ? ids : [];
     productIds.forEach(async (id) => {
-      const result = await Product.findByIdAndDelete({ id });
+      const result = await Product.findByIdAndDelete(id);
       if (!result) {
         return res.status(401).json({ success: false, message: "Couldn't find resource to be deleted" });
       }
@@ -376,6 +386,7 @@ exports.delete_multiple_products = async (req, res) => {
     res.status(201).json({ success: true, message: "Selected Items Deleted!" });
   } catch (err) {
     if (err) {
+      console.log(err)
       res.status(500).json({ success: false, message: "Internal Server Error" })
     }
   }
