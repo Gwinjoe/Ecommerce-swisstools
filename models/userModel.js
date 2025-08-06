@@ -45,6 +45,13 @@ const userSchema = mongoose.Schema({
       return this.active ? "Active" : "Inactive";
     }
   },
+  avatar: {
+    type: String,
+    default: "https://res.cloudinary.com/dlmscmwth/image/upload/v1754088011/samples/two-ladies.jpg"
+  },
+  notifications: [{
+    type: String,
+  }],
   verified: {
     type: Boolean,
     default: false,

@@ -1,4 +1,5 @@
 import { gsap } from "gsap";
+import showStatusModal from "./modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".login-form");
@@ -37,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Form validation
   loginBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     const inputs = form.querySelectorAll("input[required]");
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#password").value;
     let isValid = true;
 
     inputs.forEach(input => {
@@ -58,7 +62,23 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.1,
         yoyo: true,
         repeat: 1,
-        onComplete: () => {
+        onComplete: async () => {
+          console.log({ email, password })
+          const response = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email: email, password: password })
+          });
+          const { success, message } = await response.json();
+
+          if (success) {
+            showStatusModal("success", message);
+          } else {
+            showStatusModal("failed", message);
+          }
+
           alert("Login successful!"); // Placeholder
         }
       });
@@ -66,6 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please fill in all required fields.");
     }
   });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  })
 
   // Animate form and title on page load
   gsap.fromTo(".login-title",

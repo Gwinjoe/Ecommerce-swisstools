@@ -1,12 +1,15 @@
 if (process.env.NODE_ENV != "production") require("dotenv").config();
 const express = require("express");
 const app = express();
+const http = require("http");
+const server = http.createServer(app);
 const PORT = process.env.PORT || 3500;
 const path = require("path");
 const DATABASE_URI = process.env.DATABASE_URI;
 const connectDB = require("./config/connectDB");
 const passport = require("passport");
 const session = require("express-session");
+const socketIO = require("./controllers/chat/socket")
 const adminRoutes = require("./routes/admin");
 const rootRoutes = require("./routes/root")
 const cors = require("cors");
@@ -21,7 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/", express.static(path.join(__dirname, "frontend")));
 app.use("/admin", express.static(path.join(__dirname, "frontend")));
-app.use(session({
+const sessionMiddleware = session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
@@ -29,19 +32,21 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24,
   }
-}))
-
+})
+app.use(sessionMiddleware);
 require("./config/cloudinary");
 require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
+
+//logging the current user / session to ascertain current user
 //app.use((req, res, next) => {
 //  console.log(req.session);
 //  console.log(req.user);
 // next();
 //})
 
-
+socketIO(server, sessionMiddleware);
 app.use("/admin", adminRoutes);
 app.use("/", rootRoutes);
 app.use("/api", require("./routes/api/routes"))
@@ -61,6 +66,6 @@ app.use((err, req, res, next) => {
   }
 
 })
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 })

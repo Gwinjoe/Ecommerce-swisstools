@@ -21,7 +21,6 @@ const chatSchema = mongoose.Schema({
   messages: [{
     text: {
       type: String,
-      required: [true, "A message is required"],
     },
     sender: {
       type: mongoose.Types.Schema.ObjectId,
@@ -31,8 +30,12 @@ const chatSchema = mongoose.Schema({
     read: {
       type: Boolean,
       default: false,
+    },
+    time: {
+      type: String,
+      default: Date.now(),
     }
-  }, { timestamps: true }],
+  }],
 
 }, {
   timestamps: true,
