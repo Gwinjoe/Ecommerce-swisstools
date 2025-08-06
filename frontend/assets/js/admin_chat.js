@@ -5,16 +5,25 @@ const socket = io();
 
 gsap.registerPlugin(ScrollTrigger);
 
-let chats = []
-// Sample chat data (replace with actual data from backend)
 async function getChatThreads() {
-  const response = await fetch("/api/chats_thread");
+  const response = await fetch("/api/admin_chats_thread");
   const { results } = await response.json();
-  chats = results;
+  return results;
+
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  getChatThreads();
+let chats = []
+//Sample chat data (replace with actual data from backend)
+window.addEventListener("DOMContentLoaded", async () => {
+  // Initial Render
+  const results = await getChatThreads();
+  chats = results;
+  renderChatThreads(results);
+  if (chats.length > 0) {
+    document.querySelector(".chat-thread").classList.add("active");
+    renderMessages(results[0]._id);
+  }
+
 })
 
 const chats2 = [
@@ -209,17 +218,18 @@ document.addEventListener("click", (e) => {
 });
 
 // Render Chat Threads
-function renderChatThreads(data) {
+async function renderChatThreads(data) {
   try {
     chatList.innerHTML = "";
-    data.forEach(chat => {
+    const results = data ? data : await getChatThreads();
+    results.forEach(chat => {
       const thread = document.createElement("div");
       thread.classList.add("chat-thread");
       thread.setAttribute("data-id", chat._id);
       thread.innerHTML = `
-                <img src="${chat.admin.avatar}" alt="${chat.admin.name}">
+                <img src="${chat.user.avatar}" alt="${chat.user.name}">
                 <div class="chat-thread-info">
-                    <span class="chat-thread-name">${chat.admin.name}</span>
+                    <span class="chat-thread-name">${chat.user.name}</span>
                     <span class="chat-thread-preview">${chat.messages[chat.messages.length - 1].text}</span>
                 </div>
                 <span class="chat-thread-time">${chat.messages[chat.messages.length - 1].time}</span>
@@ -248,9 +258,9 @@ function renderMessages(chatId) {
       return;
     }
 
-    chatContact.querySelector(".contact-name").textContent = chat.admin.name;
-    chatContact.querySelector(".contact-status").textContent = chat.admin.status;
-    chatContact.querySelector(".contact-img").src = chat.admin.avatar;
+    chatContact.querySelector(".contact-name").textContent = chat.user.name;
+    chatContact.querySelector(".contact-status").textContent = chat.user.status;
+    chatContact.querySelector(".contact-img").src = chat.user.avatar;
 
     chatMessages.innerHTML = "";
     chat.messages.forEach(message => {
@@ -344,16 +354,16 @@ newChatBtn.addEventListener("click", () => {
 chatSearch.addEventListener("input", () => {
   try {
     const value = chatSearch.value.toLowerCase();
-    const filtered = chats.filter(c => c.contact.toLowerCase().includes(value));
+    const filtered = chats.filter(c => c.user.name.toLowerCase().includes(value));
     renderChatThreads(filtered);
   } catch (error) {
     console.error("Error searching chats:", error);
   }
 });
 
-// Initial Render
 renderChatThreads(chats);
 if (chats.length > 0) {
   document.querySelector(".chat-thread").classList.add("active");
-  renderMessages(1);
+  renderMessages(chats[0].id);
 }
+

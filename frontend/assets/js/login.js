@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Form validation
-  loginBtn.addEventListener("click", (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     const inputs = form.querySelectorAll("input[required]");
     const email = document.querySelector("#email").value;
@@ -86,10 +86,10 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please fill in all required fields.");
     }
   });
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-  })
+  //
+  // form.addEventListener("submit", (e) => {
+  //   e.preventDefault();
+  // })
 
   // Animate form and title on page load
   gsap.fromTo(".login-title",

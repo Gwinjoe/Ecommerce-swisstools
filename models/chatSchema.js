@@ -1,31 +1,32 @@
 const mongoose = require("mongoose");
-{
-  id: 1,
-    contact: "Support Team",
-      avatar: "assets/images/team1.jpeg",
-        status: "Online",
-          messages: [
-            { id: 1, text: "Hello! How can we assist you today?", sender: "support", time: "10:30 AM", read: true },
-            { id: 2, text: "I have an issue with my order #1234.", sender: "user", time: "10:32 AM", read: true },
-            { id: 3, text: "Can you provide more details about the issue?", sender: "support", time: "10:35 AM", read: true }
-          ]
-}
-
+// {
+//   id: 1,
+//     contact: "Support Team",
+//       avatar: "assets/images/team1.jpeg",
+//         status: "Online",
+//           messages: [
+//             { id: 1, text: "Hello! How can we assist you today?", sender: "support", time: "10:30 AM", read: true },
+//             { id: 2, text: "I have an issue with my order #1234.", sender: "user", time: "10:32 AM", read: true },
+//             { id: 3, text: "Can you provide more details about the issue?", sender: "support", time: "10:35 AM", read: true }
+//           ]
+// }
+//
 
 const chatSchema = mongoose.Schema({
-  contact: {
-    type: mongoose.Types.Schema.ObjectId,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: [true, "A user is required"],
+  },
+  admin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
   },
   messages: [{
     text: {
       type: String,
     },
     sender: {
-      type: mongoose.Types.Schema.ObjectId,
-      ref: "User",
-      required: [true, "A sender is required"],
+      type: String
     },
     read: {
       type: Boolean,
@@ -33,7 +34,7 @@ const chatSchema = mongoose.Schema({
     },
     time: {
       type: String,
-      default: Date.now(),
+      default: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
     }
   }],
 

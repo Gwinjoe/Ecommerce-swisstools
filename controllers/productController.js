@@ -375,6 +375,26 @@ exports.delete_multiple_products = async (req, res) => {
   try {
     const productIds = selectedIds || [];
     for (const id of productIds) {
+      const product = await Product.findById(id);
+      if (!product) {
+        return res.status(404).json({ success: false, message: 'Product not found' });
+      }
+
+      const publicIds = []
+
+      if (product.images.mainImage && product.images.mainImage.publicId) {
+        publicIds.push(product.images.mainImage.publicId);
+      }
+
+      product.images.thumbnails.forEach(thumbnail => {
+        if (thumbnail.publicId) {
+          publicIds.push(thumbnail.publicId);
+        }
+      });
+
+      if (publicIds.length > 0) {
+        await cloudinary.api.delete_resources(publicIds);
+      }
       const result = await Product.findByIdAndDelete(id);
       if (!result) {
         return res.status(401).json({ success: false, message: "Couldn't find resource to be deleted" });

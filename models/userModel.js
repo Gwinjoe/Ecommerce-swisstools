@@ -28,7 +28,6 @@ const userSchema = mongoose.Schema({
     ref: "Product",
   }],
   phoneNo: {
-    select: false,
     trim: true,
     type: String,
   },
@@ -52,6 +51,10 @@ const userSchema = mongoose.Schema({
   notifications: [{
     type: String,
   }],
+  assignedAdmin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   verified: {
     type: Boolean,
     default: false,

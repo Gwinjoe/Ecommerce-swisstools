@@ -63,7 +63,7 @@ router.get("/edit_product", isAdmin, (req, res) => {
 });
 
 router.get("/chat", isAdmin, (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "frontend", "chat.html"));
+  res.sendFile(path.join(__dirname, "..", "frontend", "admin", "chat.html"));
 })
 
 module.exports = router;

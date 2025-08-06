@@ -7,6 +7,9 @@ const { signup, signout, adminSignout } = require("../../controllers/authControl
 const { get_users, get_user_by_id, edit_user, delete_user, user_count, add_user } = require("../../controllers/userController")
 const path = require("path");
 const multer = require('multer');
+const { getChatsThread, getAdminChatsThread, getChats } = require("../../controllers/chat/chatController");
+
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "..", "..", "tmp", "uploads"));
@@ -52,4 +55,7 @@ router.delete("/delete_user/:id", delete_user);
 
 router.get("/usercount", user_count);
 
+router.get("/chats_thread", getChatsThread);
+router.get("/admin_chats_thread", getAdminChatsThread)
+router.get("/chats", getChats)
 module.exports = router;
