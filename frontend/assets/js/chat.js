@@ -9,12 +9,18 @@ let chats = []
 // Sample chat data (replace with actual data from backend)
 async function getChatThreads() {
   const response = await fetch("/api/chats_thread");
-  const { results } = await response.json();
-  chats = results;
+  const { existingChat } = await response.json();
+  return existingChat;
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  getChatThreads();
+window.addEventListener("DOMContentLoaded", async () => {
+  const results = await getChatThreads();
+  chats = results;
+  renderChatThreads(results);
+  if (chats.length > 0) {
+    document.querySelector(".chat-thread").classList.add("active");
+    renderMessages(results[0]._id);
+  }
 })
 
 const chats2 = [
@@ -209,10 +215,11 @@ document.addEventListener("click", (e) => {
 });
 
 // Render Chat Threads
-function renderChatThreads(data) {
+async function renderChatThreads(data) {
   try {
     chatList.innerHTML = "";
-    data.forEach(chat => {
+    const results = data ? data : await getChatThreads();
+    results.forEach(chat => {
       const thread = document.createElement("div");
       thread.classList.add("chat-thread");
       thread.setAttribute("data-id", chat._id);
@@ -220,9 +227,9 @@ function renderChatThreads(data) {
                 <img src="${chat.admin.avatar}" alt="${chat.admin.name}">
                 <div class="chat-thread-info">
                     <span class="chat-thread-name">${chat.admin.name}</span>
-                    <span class="chat-thread-preview">${chat.messages[chat.messages.length - 1].text}</span>
+                    <span class="chat-thread-preview">${chat.messages.length && chat.messages[chat.messages.length - 1].text}</span>
                 </div>
-                <span class="chat-thread-time">${chat.messages[chat.messages.length - 1].time}</span>
+                <span class="chat-thread-time">${chat.messages.length && chat.messages[chat.messages.length - 1].time}</span>
             `;
       chatList.appendChild(thread);
     });
@@ -318,13 +325,17 @@ function sendMessage() {
     const chat = chats.find(c => c._id === chatId);
     if (chat) {
       const newMessage = {
-        id: chat.messages.length + 1,
         text,
         sender: "user",
-        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        time: new Intl.DateTimeFormat('default', {
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric'
+        }).format(new Date()),
         read: true
       };
       chat.messages.push(newMessage);
+      socket.emit("chat message", newMessage);
       console.log(`Message sent to chat ${chatId}: ${text}`); // Replace with AJAX/WebSocket
       renderMessages(chatId);
       renderChatThreads(chats); // Update thread preview
@@ -334,6 +345,21 @@ function sendMessage() {
     console.error("Error sending message:", error);
   }
 }
+
+socket.on('chat message', function(msg) {
+  const activeThread = document.querySelector(".chat-thread.active");
+  if (!activeThread) {
+    console.log("No chat selected");
+    return;
+  }
+
+  const chatId = activeThread.getAttribute("data-id");
+  const chat = chats.find(c => c._id === chatId);
+  chat.messages.push(msg);
+  renderMessages(chatId);
+  renderChatThreads(chats);
+  window.scrollTo(0, document.body.scrollHeight);
+});
 
 // New Chat Button
 newChatBtn.addEventListener("click", () => {
@@ -355,5 +381,5 @@ chatSearch.addEventListener("input", () => {
 renderChatThreads(chats);
 if (chats.length > 0) {
   document.querySelector(".chat-thread").classList.add("active");
-  renderMessages(1);
+  renderMessages(chats[0]._id);
 }

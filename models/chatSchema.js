@@ -34,7 +34,11 @@ const chatSchema = mongoose.Schema({
     },
     time: {
       type: String,
-      default: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      default: new Intl.DateTimeFormat('default', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      }).format(new Date()),
     }
   }],
 

@@ -1,6 +1,8 @@
 const { Server } = require('socket.io');
 const wrap = require('../../middlewares/wrapMiddleware');
 const passport = require('passport');
+const Users = require("../../models/userModel")
+const Chats = require("../../models/chatSchema")
 
 module.exports = function(server, sessionMiddleware) {
   const io = new Server(server);
@@ -17,17 +19,21 @@ module.exports = function(server, sessionMiddleware) {
     }
   });
 
-  io.on('connection', (socket) => {
+  io.on('connection', async (socket) => {
     const user = socket.request.user;
+    const id = user._id;
+    const isAdmin = user.admin;
     console.log(`User connected: ${user}`);
-
+    let chats = []
+    if (isAdmin) {
+      chats = await Chats.find({ admin: id }).populate("user");
+    } else {
+      chats = await Chats.find({ admin: id }).populate("admin");
+    }
     socket.on('chat message', (msg) => {
       console.log(`${user.email}: ${msg}`);
       // Broadcast to admin or whoever is supposed to receive
-      io.emit('chat message', {
-        user: user.username,
-        message: msg,
-      });
+      socket.broadcast.emit('chat message', msg);
     });
 
     socket.on('disconnect', () => {

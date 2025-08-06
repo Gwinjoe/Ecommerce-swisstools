@@ -230,9 +230,9 @@ async function renderChatThreads(data) {
                 <img src="${chat.user.avatar}" alt="${chat.user.name}">
                 <div class="chat-thread-info">
                     <span class="chat-thread-name">${chat.user.name}</span>
-                    <span class="chat-thread-preview">${chat.messages[chat.messages.length - 1].text}</span>
+                    <span class="chat-thread-preview">${chat.messages.length && chat.messages[chat.messages.length - 1].text}</span>
                 </div>
-                <span class="chat-thread-time">${chat.messages[chat.messages.length - 1].time}</span>
+                <span class="chat-thread-time">${chat.messages.length && chat.messages[chat.messages.length - 1].time}</span>
             `;
       chatList.appendChild(thread);
     });
@@ -263,6 +263,9 @@ function renderMessages(chatId) {
     chatContact.querySelector(".contact-img").src = chat.user.avatar;
 
     chatMessages.innerHTML = "";
+    if (!chat.messages) {
+      return
+    }
     chat.messages.forEach(message => {
       const messageEl = document.createElement("div");
       messageEl.classList.add("message", message.sender === "user" ? "sent" : "received");
@@ -328,14 +331,18 @@ function sendMessage() {
     const chat = chats.find(c => c._id === chatId);
     if (chat) {
       const newMessage = {
-        id: chat.messages.length + 1,
         text,
-        sender: "user",
-        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        sender: "admin",
+        time: new Intl.DateTimeFormat('default', {
+          hour: 'numeric',
+          minute: 'numeric',
+          second: 'numeric'
+        }).format(new Date()),
         read: true
       };
       chat.messages.push(newMessage);
       console.log(`Message sent to chat ${chatId}: ${text}`); // Replace with AJAX/WebSocket
+      socket.emit("chat message", newMessage);
       renderMessages(chatId);
       renderChatThreads(chats); // Update thread preview
       messageInput.value = "";
@@ -344,6 +351,22 @@ function sendMessage() {
     console.error("Error sending message:", error);
   }
 }
+
+socket.on("chat message", function(msg) {
+  const activeThread = document.querySelector(".chat-thread.active");
+  if (!activeThread) {
+    console.log("No chat selected");
+    return;
+  }
+
+  const chatId = activeThread.getAttribute("data-id");
+  const chat = chats.find(c => c._id === chatId);
+  chat.messages.push(msg);
+  renderMessages(chatId);
+  renderChatThreads(chats);
+  window.scrollTo(0, document.body.scrollHeight);
+});
+
 
 // New Chat Button
 newChatBtn.addEventListener("click", () => {
@@ -364,6 +387,6 @@ chatSearch.addEventListener("input", () => {
 renderChatThreads(chats);
 if (chats.length > 0) {
   document.querySelector(".chat-thread").classList.add("active");
-  renderMessages(chats[0].id);
+  renderMessages(chats[0]._id);
 }
 
