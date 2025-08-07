@@ -18,6 +18,13 @@ const productSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+  brand: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Brand"
+  },
+  ratings: {
+    type: mongoose.Types.Decimal128,
+  },
   stock: {
     type: Number,
     required: [true, "Stock Quantity is required"],

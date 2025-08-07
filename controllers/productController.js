@@ -3,6 +3,17 @@ const Category = require("../models/categorySchema");
 const { uploader, uploadMultiple } = require("../middlewares/uploader");
 const cloudinary = require("cloudinary").v2;
 
+
+exports.product_count = async (req, res) => {
+  const count = await Product.countDocuments({});
+  res.status(200).json({ success: true, count })
+}
+
+exports.category_count = async (req, res) => {
+  const count = await Category.countDocuments({});
+  res.status(200).json({ success: true, count })
+}
+
 exports.getProducts = async (req, res) => {
   const data = await Product.find().sort({ createdAt: -1 }).populate("category");
   res.status(201).json({ success: true, data });

@@ -27,6 +27,10 @@ const userSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
   }],
+  cart: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product"
+  }],
   phoneNo: {
     trim: true,
     type: String,

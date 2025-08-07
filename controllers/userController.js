@@ -1,11 +1,28 @@
 const User = require("../models/userModel");
 const { dohash, dohashValidation, hmacProcess } = require("../utils/hashing");
 
+
+
 exports.get_users = async (req, res) => {
   try {
     const data = await User.find();
     if (!data) {
-      return res.status(401).json({ success: false, message: "No Category Found!" });
+      return res.status(401).json({ success: false, message: "No User Found!" });
+    }
+    res.status(200).json({ success: true, data })
+  } catch (err) {
+    if (err) {
+      console.log(err)
+    }
+  }
+}
+
+exports.get_user = async (req, res) => {
+  const id = req.user._id;
+  try {
+    const data = await User.findById(id);
+    if (!data) {
+      return res.status(401).json({ success: false, message: "No user Found!" });
     }
     res.status(200).json({ success: true, data })
   } catch (err) {
@@ -107,5 +124,77 @@ exports.delete_user = async (req, res) => {
     res.status(201).json({ success: true, message: "User Deleted!" });
   } catch (err) {
     if (err) console.log(err)
+  }
+}
+
+exports.deletefrom_cart = async (req, res) => {
+  const { userId, itemId } = req.body;
+  try {
+    const existingUser = await User.findById(userId);
+    if (!existingUser) {
+      return res.status(401).json({ success: false, message: "User not found" })
+    }
+
+    existingUser.cart.filter((product) => product._id !== itemId);
+    const results = await existingUser.save();
+    res.status(201).json({ success: true, message: "Item added successfully" });
+  } catch (err) {
+    if (err) console.log(err);
+    res.status(500).json({ success: false, message: "something went wrong" });
+  }
+}
+
+exports.deletefrom_wishlist = async (req, res) => {
+  const { userId, itemId } = req.body;
+  try {
+    const existingUser = await User.findById(userId);
+    if (!existingUser) {
+      return res.status(401).json({ success: false, message: "User not found" })
+    }
+
+    existingUser.wishlist.filter((product) => product._id !== itemId);
+    const results = await existingUser.save();
+    res.status(201).json({ success: true, message: "Item added successfully" });
+  } catch (err) {
+    if (err) console.log(err);
+    res.status(500).json({ success: false, message: "something went wrong" });
+  }
+}
+
+exports.addTo_cart = async (req, res) => {
+  const { id, cartItem } = req.body;
+  try {
+    const existingUser = await User.findById(id);
+    if (!existingUser) {
+      return res.status(401).json({ success: false, message: "User not found" })
+    }
+
+    if (cartItem) {
+      existingUser.cart.push(cartItem);
+    }
+    const results = await existingUser.save();
+    res.status(201).json({ success: true, message: "Item added successfully" });
+  } catch (err) {
+    if (err) console.log(err);
+    res.status(500).json({ success: false, message: "something went wrong" });
+  }
+}
+
+exports.addTo_wishlist = async (req, res) => {
+  const { id, item } = req.body;
+  try {
+    const existingUser = await User.findById(id);
+    if (!existingUser) {
+      return res.status(401).json({ success: false, message: "User not found" })
+    }
+
+    if (item) {
+      existingUser.wishlist.push(item);
+    }
+    const results = await existingUser.save();
+    res.status(201).json({ success: true, message: "Item added successfully" });
+  } catch (err) {
+    if (err) console.log(err);
+    res.status(500).json({ success: false, message: "something went wrong" });
   }
 }

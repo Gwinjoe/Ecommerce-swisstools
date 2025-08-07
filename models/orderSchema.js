@@ -4,6 +4,7 @@ const orderSchema = mongoose.Schema({
   status: {
     type: String,
     required: true,
+    default: "Pending"
   },
   products: [{
     product: {
@@ -18,6 +19,9 @@ const orderSchema = mongoose.Schema({
     },
     totalPrice: {
       type: mongoose.Types.Decimal128,
+      default: function() {
+        return this.product.price.$numberDecimal * this.quantity
+      }
     }
   }],
   customer: {
@@ -25,11 +29,15 @@ const orderSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
+  shippingAddress: {
+    type: String,
+    default: function() {
+      return this.customer.address
+    }
   },
-
+  paymentMethod: {
+    type: String,
+  }
 
 }, {
   timestamps: true,
