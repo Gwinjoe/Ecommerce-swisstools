@@ -15,6 +15,11 @@ exports.category_count = async (req, res) => {
 }
 
 exports.getProducts = async (req, res) => {
+  const { limit } = req.query;
+  if (limit) {
+    const data = await Product.find().limit(limit).sort({ createdAt: -1 }).populate("category").populate("brand");
+    return res.status(201).json({ success: true, data })
+  }
   const data = await Product.find().sort({ createdAt: -1 }).populate("category").populate("brand");
   res.status(201).json({ success: true, data });
 }
