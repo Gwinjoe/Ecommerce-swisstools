@@ -1,10 +1,19 @@
-<<<<<<< HEAD
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import showStatusModal from "./modal.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Sample category data (replace with actual data from your backend)
+const urlParams = new URLSearchParams(window.location.search);
+const categoryId = urlParams.get('id');
+
+
+const response = await fetch(`/api/brand/${categoryId}`);
+const { result } = await response.json();
+
+
+const category = result;
 const menuToggle = document.querySelector(".menu-toggle");
 const headerExtras = document.querySelector(".header-extras");
 const themeToggleBtn = document.querySelector(".theme-toggle-btn");
@@ -17,7 +26,6 @@ const scrollTopBtn = document.querySelector(".scroll-top-btn");
 const yearSpan = document.querySelector(".year");
 const newsletterForm = document.querySelector(".footer-newsletter");
 const form = document.querySelector(".category-form");
-const button = document.querySelector(".save-btn")
 
 // Set current year in footer
 yearSpan.textContent = new Date().getFullYear();
@@ -157,30 +165,41 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Form Submission
-button.addEventListener("click", async function() {
+// Load Category Details
+function loadCategoryDetails() {
   try {
+    if (category) {
+      document.querySelector(".category-id").value = category._id;
+      document.querySelector(".category-name").value = category.name;
+      document.querySelector(".category-description").value = category.description || "";
+    } else {
+      document.querySelector(".category-form").innerHTML = "<p>Category not found.</p>";
+    }
+
+    gsap.from(".category-form", {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: "power2.out"
+    });
+  } catch (error) {
+    console.error("Error loading category details:", error);
+  }
+}
+
+// Form Submission
+document.querySelector(".save-btn").addEventListener("click", async function() {
+  try {
+    const id = document.querySelector(".category-id").value;
     const name = document.querySelector(".category-name").value;
     const description = document.querySelector(".category-description").value;
 
-    const response = await fetch("/api/add_brand", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name,
-        description: description
-      })
-    });
-
+    // Simulate updating category (replace with AJAX call to edit_category.html)
+    console.log(`Category ${id} updated: ${name}, Description: ${description}`);
+    const response = await fetch("/api/edit_brand", { method: "PUT", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, name, description }) });
     const result = await response.json();
-
-    alert("success")
     if (result.success) {
       showStatusModal("success");
-      name = "";
-      description = "";
     } else {
       showStatusModal("failed");
     }
@@ -188,73 +207,6 @@ button.addEventListener("click", async function() {
     console.error("Error submitting form:", error);
   }
 });
-// Form Animation
-gsap.from(".category-form", {
-  opacity: 0,
-  y: 20,
-  duration: 0.5,
-  ease: "power2.out"
-});
-=======
-let brands = [];
 
-function addBrand() {
-    const brandName = document.getElementById('brandName').value;
-    const brandLogo = document.getElementById('brandLogo').files[0];
-    const brandDescription = document.getElementById('brandDescription').value;
-
-    if (!brandName) {
-        alert('Brand name is required');
-        return;
-    }
-
-    const brand = {
-        id: Date.now(),
-        name: brandName,
-        description: brandDescription,
-        logo: brandLogo ? URL.createObjectURL(brandLogo) : ''
-    };
-
-    brands.push(brand);
-    updateBrandList();
-    clearForm();
-
-    // Preview logo
-    if (brandLogo) {
-        const preview = document.getElementById('logoPreview');
-        preview.innerHTML = `<img src="${brand.logo}" alt="Brand Logo">`;
-    }
-}
-
-function updateBrandList() {
-    const brandList = document.getElementById('brandList');
-    brandList.innerHTML = '';
-    brands.forEach(brand => {
-        const div = document.createElement('div');
-        div.className = 'brand-item';
-        div.innerHTML = `
-            ${brand.logo ? `<img src="${brand.logo}" alt="${brand.name}">` : ''}
-            <span>${brand.name} - ${brand.description}</span>
-            <button onclick="deleteBrand(${brand.id})">Delete</button>
-        `;
-        brandList.appendChild(div);
-    });
-}
-
-function deleteBrand(id) {
-    brands = brands.filter(brand => brand.id !== id);
-    updateBrandList();
-}
-
-function clearForm() {
-    document.getElementById('brandName').value = '';
-    document.getElementById('brandLogo').value = '';
-    document.getElementById('brandDescription').value = '';
-    document.getElementById('logoPreview').innerHTML = '';
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    updateBrandList();
-});
->>>>>>> 7614e12a395f8ffa379669ce48387b8edcebe144
+// Initial Load
+loadCategoryDetails();

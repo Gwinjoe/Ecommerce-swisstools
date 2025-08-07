@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SWISSTools - Admin Dashboard - Add Brand</title>
+  <title>SWISSTools - View Brand</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +27,7 @@
     </script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="../assets/css/add_category.css" />
+  <link rel="stylesheet" href="../assets/css/manage_view_category.css" />
 </head>
 
 <body>
@@ -92,21 +91,25 @@
   <!-- Main Content -->
   <main class="admin-main">
     <section class="admin-content">
-      <h1 class="section-title"><i class="fas fa-plus-circle"></i> Add Brand</h1>
-      <form class="category-form">
-        <div class="form-group">
-          <label>Name:</label>
-          <input type="text" name="name" class="category-name" required />
+      <h1 class="section-title"><i class="fas fa-tags"></i> Brand Details</h1>
+      <div class="category-details">
+        <div class="detail-group">
+          <label>ID:</label>
+          <p class="category-id"></p>
         </div>
-        <div class="form-group">
+        <div class="detail-group">
+          <label>Name:</label>
+          <p class="category-name"></p>
+        </div>
+        <div class="detail-group">
           <label>Description:</label>
-          <textarea class="category-description" name="description" rows="4"></textarea>
+          <p class="category-description"></p>
         </div>
         <div class="form-actions">
-          <button type="button" class="save-btn"><i class="fas fa-save"></i> Save</button>
-          <a href="/admin/add_brand" class="cancel-btn"><i class="fas fa-times"></i> Cancel</a>
+          <a href="/admin/brands" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Brands</a>
+          <a href="/admin/edit_brand?id=" class="edit-btn"><i class="fas fa-edit"></i> Edit Brand</a>
         </div>
-      </form>
+      </div>
     </section>
   </main>
 
@@ -165,52 +168,7 @@
   </footer>
 
   <!-- JS -->
-  <script type="module" src="../assets/js/add_brand.js"></script>
+  <script type="module" src="../assets/js/view_brand.js"></script>
 </body>
 
 </html>
-=======
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Brand - SWISSTools Admin</title>
-    <link rel="stylesheet" href="assets/css/add_brand.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/swisstools_logo.png">
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Add New Brand</h1>
-        <div class="brand-form">
-            <div class="form-group">
-                <label for="brandName">Brand Name</label>
-                <input type="text" id="brandName" placeholder="Enter brand name" required>
-            </div>
-            <div class="form-group">
-                <label for="brandLogo">Brand Logo</label>
-                <input type="file" id="brandLogo" accept="image/*">
-                <div class="image-preview" id="logoPreview"></div>
-            </div>
-            <div class="form-group">
-                <label for="brandDescription">Description</label>
-                <textarea id="brandDescription" placeholder="Enter brand description" rows="4"></textarea>
-            </div>
-            <button class="btn" onclick="addBrand()" type="button">Add Brand</button>
-        </div>
-        <div class="brand-list">
-            <h2>Existing Brands</h2>
-            <div id="brandList"></div>
-        </div>
-    </div>
-    <script src="assets/js/add_brand.js" type="module"></script>
-</body>
-
-</html>
->>>>>>> 7614e12a395f8ffa379669ce48387b8edcebe144

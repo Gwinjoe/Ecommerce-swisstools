@@ -2,10 +2,9 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SWISSTools - Admin Dashboard - Add Brand</title>
+  <title>SWISSTools - Manage Brands</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +27,7 @@
     </script>
 
   <!-- Custom Styles -->
-  <link rel="stylesheet" href="../assets/css/add_category.css" />
+  <link rel="stylesheet" href="../assets/css/manage_categories.css" />
 </head>
 
 <body>
@@ -92,34 +91,57 @@
   <!-- Main Content -->
   <main class="admin-main">
     <section class="admin-content">
-      <h1 class="section-title"><i class="fas fa-plus-circle"></i> Add Brand</h1>
-      <form class="category-form">
-        <div class="form-group">
-          <label>Name:</label>
-          <input type="text" name="name" class="category-name" required />
-        </div>
-        <div class="form-group">
-          <label>Description:</label>
-          <textarea class="category-description" name="description" rows="4"></textarea>
-        </div>
-        <div class="form-actions">
-          <button type="button" class="save-btn"><i class="fas fa-save"></i> Save</button>
-          <a href="/admin/add_brand" class="cancel-btn"><i class="fas fa-times"></i> Cancel</a>
-        </div>
-      </form>
+      <div class="category-actions">
+        <input type="text" class="search-input" placeholder="Search by brand name..." />
+        <select class="sort-select">
+          <option value="default">Sort by</option>
+          <option value="name">Name (A-Z)</option>
+          <option value="id">ID</option>
+        </select>
+        <a href="/admin/add_brand" class="add-category-btn"><i class="fas fa-plus-circle"></i> Add Brand</a>
+      </div>
+
+      <div class="table-container">
+        <table class="categories-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="category-table-body">
+            <!-- JavaScript will inject category rows here -->
+          </tbody>
+        </table>
+      </div>
     </section>
   </main>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-modal"><i class="fas fa-times-circle"></i></span>
+      <h2 class="modal-title"><i class="fas fa-trash-alt"></i> Confirm Deletion</h2>
+      <p>Are you sure you want to delete the brand "<span class="category-name"></span>"?</p>
+      <div class="form-actions">
+        <button type="button" class="confirm-delete">Delete</button>
+        <button type="button" class="close-modal">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-column animate-fade">
-        <h3 class="footer-logo">LO<span class="highlight">GO</span></h3>
+        <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
         <p>Your trusted partner in engineering & construction tools.</p>
         <div class="footer-contact">
-          <p><i class="fas fa-map-marker-alt"></i> 123 Builder Lane, Lagos, Nigeria</p>
-          <p><i class="fas fa-phone-alt"></i> +234 812 345 6789</p>
-          <p><i class="fas fa-envelope"></i> support@example.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> 5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
+          <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+          <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
         </div>
       </div>
       <div class="footer-column animate-fade">
@@ -165,52 +187,7 @@
   </footer>
 
   <!-- JS -->
-  <script type="module" src="../assets/js/add_brand.js"></script>
+  <script type="module" src="../assets/js/manage_brand.js"></script>
 </body>
 
 </html>
-=======
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Brand - SWISSTools Admin</title>
-    <link rel="stylesheet" href="assets/css/add_brand.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/swisstools_logo.png">
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet">
-    <!-- Font Awesome CDN -->
-    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Add New Brand</h1>
-        <div class="brand-form">
-            <div class="form-group">
-                <label for="brandName">Brand Name</label>
-                <input type="text" id="brandName" placeholder="Enter brand name" required>
-            </div>
-            <div class="form-group">
-                <label for="brandLogo">Brand Logo</label>
-                <input type="file" id="brandLogo" accept="image/*">
-                <div class="image-preview" id="logoPreview"></div>
-            </div>
-            <div class="form-group">
-                <label for="brandDescription">Description</label>
-                <textarea id="brandDescription" placeholder="Enter brand description" rows="4"></textarea>
-            </div>
-            <button class="btn" onclick="addBrand()" type="button">Add Brand</button>
-        </div>
-        <div class="brand-list">
-            <h2>Existing Brands</h2>
-            <div id="brandList"></div>
-        </div>
-    </div>
-    <script src="assets/js/add_brand.js" type="module"></script>
-</body>
-
-</html>
->>>>>>> 7614e12a395f8ffa379669ce48387b8edcebe144

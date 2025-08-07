@@ -1,10 +1,19 @@
-<<<<<<< HEAD
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import showStatusModal from "./modal.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Sample categories data (replace with actual data from your backend)
+
+
+
+const response = await fetch("/api/brands");
+const { data } = await response.json();
+const categories = data;
+
+const tableBody = document.querySelector(".categories-table tbody");
+const modal = document.querySelector(".modal");
 const menuToggle = document.querySelector(".menu-toggle");
 const headerExtras = document.querySelector(".header-extras");
 const themeToggleBtn = document.querySelector(".theme-toggle-btn");
@@ -16,8 +25,6 @@ const userProfile = document.querySelector(".user-profile");
 const scrollTopBtn = document.querySelector(".scroll-top-btn");
 const yearSpan = document.querySelector(".year");
 const newsletterForm = document.querySelector(".footer-newsletter");
-const form = document.querySelector(".category-form");
-const button = document.querySelector(".save-btn")
 
 // Set current year in footer
 yearSpan.textContent = new Date().getFullYear();
@@ -157,104 +164,149 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Form Submission
-button.addEventListener("click", async function() {
-  try {
-    const name = document.querySelector(".category-name").value;
-    const description = document.querySelector(".category-description").value;
-
-    const response = await fetch("/api/add_brand", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name,
-        description: description
-      })
-    });
-
-    const result = await response.json();
-
-    alert("success")
-    if (result.success) {
-      showStatusModal("success");
-      name = "";
-      description = "";
-    } else {
-      showStatusModal("failed");
-    }
-  } catch (error) {
-    console.error("Error submitting form:", error);
+// Close modal when clicking outside
+document.addEventListener("click", (e) => {
+  if (modal.classList.contains("active") && !e.target.closest(".modal-content") && !e.target.closest(".delete-btn")) {
+    closeModal();
   }
 });
-// Form Animation
-gsap.from(".category-form", {
-  opacity: 0,
-  y: 20,
-  duration: 0.5,
-  ease: "power2.out"
-});
-=======
-let brands = [];
 
-function addBrand() {
-    const brandName = document.getElementById('brandName').value;
-    const brandLogo = document.getElementById('brandLogo').files[0];
-    const brandDescription = document.getElementById('brandDescription').value;
-
-    if (!brandName) {
-        alert('Brand name is required');
-        return;
-    }
-
-    const brand = {
-        id: Date.now(),
-        name: brandName,
-        description: brandDescription,
-        logo: brandLogo ? URL.createObjectURL(brandLogo) : ''
-    };
-
-    brands.push(brand);
-    updateBrandList();
-    clearForm();
-
-    // Preview logo
-    if (brandLogo) {
-        const preview = document.getElementById('logoPreview');
-        preview.innerHTML = `<img src="${brand.logo}" alt="Brand Logo">`;
-    }
-}
-
-function updateBrandList() {
-    const brandList = document.getElementById('brandList');
-    brandList.innerHTML = '';
-    brands.forEach(brand => {
-        const div = document.createElement('div');
-        div.className = 'brand-item';
-        div.innerHTML = `
-            ${brand.logo ? `<img src="${brand.logo}" alt="${brand.name}">` : ''}
-            <span>${brand.name} - ${brand.description}</span>
-            <button onclick="deleteBrand(${brand.id})">Delete</button>
-        `;
-        brandList.appendChild(div);
+// Table Rendering
+function renderTable(data) {
+  try {
+    tableBody.innerHTML = "";
+    data.forEach(category => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+                <td>${category._id}</td>
+                <td>${category.name}</td>
+                <td>${category.description || "No description"}</td>
+                <td>
+                    <a href="/admin/view_brand?id=${category._id}" class="action-link"><i class="fas fa-eye"></i></a>
+                    <a href="/admin/edit_brand?id=${category._id}" class="action-link"><i class="fas fa-edit"></i></a>
+                    <button class="action-btn delete-btn" data-id="${category._id}" data-name="${category.name}"><i class="fas fa-trash-alt"></i></button>
+                </td>
+            `;
+      tableBody.appendChild(row);
     });
+
+    gsap.from("tr", {
+      opacity: 0,
+      y: 10,
+      stagger: 0.1,
+      duration: 0.3
+    });
+  } catch (error) {
+    console.error("Error rendering table:", error);
+  }
 }
 
-function deleteBrand(id) {
-    brands = brands.filter(brand => brand.id !== id);
-    updateBrandList();
-}
-
-function clearForm() {
-    document.getElementById('brandName').value = '';
-    document.getElementById('brandLogo').value = '';
-    document.getElementById('brandDescription').value = '';
-    document.getElementById('logoPreview').innerHTML = '';
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    updateBrandList();
+// Event Delegation for Delete Button
+tableBody.addEventListener("click", (e) => {
+  const button = e.target.closest(".delete-btn");
+  if (button) {
+    const id = button.getAttribute("data-id");
+    const name = button.getAttribute("data-name");
+    openDeleteModal(id, name);
+  }
 });
->>>>>>> 7614e12a395f8ffa379669ce48387b8edcebe144
+
+// Event Delegation for Close Button
+document.querySelector(".modal").addEventListener("click", (e) => {
+  if (e.target.closest(".close-modal")) {
+    closeModal();
+  }
+});
+
+// Delete Confirmation Modal
+function openDeleteModal(id, name) {
+  try {
+    const modalTitle = document.querySelector(".modal-title");
+    const categoryName = document.querySelector(".category-name");
+    const confirmButton = document.querySelector(".confirm-delete");
+
+    modalTitle.innerHTML = `<i class="fas fa-trash-alt"></i> Confirm Deletion`;
+    categoryName.textContent = name;
+    confirmButton.setAttribute("data-id", id);
+
+    modal.style.display = "flex";
+    modal.classList.add("active");
+
+    gsap.from(".modal-content", {
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.3,
+      ease: "back.out(1.7)"
+    });
+  } catch (error) {
+    console.error("Error opening delete modal:", error);
+  }
+}
+
+function closeModal() {
+  try {
+    gsap.to(".modal-content", {
+      scale: 0.8,
+      opacity: 0,
+      duration: 0.3,
+      ease: "back.in(1.7)",
+      onComplete: () => {
+        modal.classList.remove("active");
+        modal.style.display = "none";
+      }
+    });
+  } catch (error) {
+    console.error("Error closing modal:", error);
+  }
+}
+
+// Confirm Delete
+document.querySelector(".confirm-delete").addEventListener("click", async (e) => {
+  try {
+    const id = e.target.getAttribute("data-id");
+    const index = categories.findIndex(c => c._id == id);
+    if (index !== -1) {
+      categories.splice(index, 1);
+      const response = await fetch(`/api/delete_brand/${id}`, { method: "DELETE" });
+      const result = await response.json();
+      if (result.success) {
+        showStatusModal("success");
+      } else {
+        showStatusModal("failed");
+      }
+      console.log(`Category ${id} deleted`); // Replace with AJAX call to delete_category.php
+      renderTable(categories);
+      closeModal();
+    }
+  } catch (error) {
+    console.error("Error deleting category:", error);
+  }
+});
+
+// Search & Sort
+document.querySelector(".search-input").addEventListener("input", function() {
+  try {
+    const value = this.value.toLowerCase();
+    const filtered = categories.filter(c => c.name.toLowerCase().includes(value));
+    renderTable(filtered);
+  } catch (error) {
+    console.error("Error in search:", error);
+  }
+});
+
+document.querySelector(".sort-select").addEventListener("change", function() {
+  try {
+    const val = this.value;
+    if (val === "name") {
+      categories.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (val === "id") {
+      categories.sort((a, b) => a.id - b.id);
+    }
+    renderTable(categories);
+  } catch (error) {
+    console.error("Error in sort:", error);
+  }
+});
+
+// Initial Render
+renderTable(categories);

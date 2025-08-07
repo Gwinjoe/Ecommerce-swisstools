@@ -22,8 +22,12 @@ const productSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Brand"
   },
+  status: {
+    type: String,
+  },
   ratings: {
     type: mongoose.Types.Decimal128,
+    default: 4.5,
   },
   stock: {
     type: Number,
