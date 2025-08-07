@@ -10,6 +10,10 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "root.html"));
 });
 
+router.get("/", (req, rex) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "ratings.html"));
+})
+
 router.get("/login", isAuth, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "login.html"));
 });

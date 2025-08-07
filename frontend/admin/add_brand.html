@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Brand - SWISSTools Admin</title>
+    <link rel="stylesheet" href="assets/css/add_brand.css">
+    <link rel="icon" type="image/x-icon" href="assets/images/swisstools_logo.png">
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Add New Brand</h1>
+        <div class="brand-form">
+            <div class="form-group">
+                <label for="brandName">Brand Name</label>
+                <input type="text" id="brandName" placeholder="Enter brand name" required>
+            </div>
+            <div class="form-group">
+                <label for="brandLogo">Brand Logo</label>
+                <input type="file" id="brandLogo" accept="image/*">
+                <div class="image-preview" id="logoPreview"></div>
+            </div>
+            <div class="form-group">
+                <label for="brandDescription">Description</label>
+                <textarea id="brandDescription" placeholder="Enter brand description" rows="4"></textarea>
+            </div>
+            <button class="btn" onclick="addBrand()" type="button">Add Brand</button>
+        </div>
+        <div class="brand-list">
+            <h2>Existing Brands</h2>
+            <div id="brandList"></div>
+        </div>
+    </div>
+    <script src="assets/js/add_brand.js" type="module"></script>
+</body>
+
+</html>
