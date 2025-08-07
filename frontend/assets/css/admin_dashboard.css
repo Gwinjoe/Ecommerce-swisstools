@@ -54,7 +54,7 @@ body {
 }
 
 .logo a {
-    font-family: var(--headline-font);
+    font-family: "Iceberg", sans-serif;
     font-size: 2.25rem;
     font-weight: 700;
     line-height: 1.3;
@@ -724,7 +724,7 @@ body {
     font-weight: 600;
     line-height: 1.3;
     color: white;
-    font-family: var(--headline-font);
+    font-family: "Iceberg", sans-serif;
 }
 
 .footer-contact p,

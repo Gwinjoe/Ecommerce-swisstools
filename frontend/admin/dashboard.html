@@ -12,6 +12,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
     rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Iceberg&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../assets/images/swisstools_logo.png">
   <!-- Font Awesome CDN -->
   <script src="https://kit.fontawesome.com/744870fa52.js" crossorigin="anonymous"></script>
   <!-- Chart.js CDN -->
@@ -20,7 +25,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() {dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
@@ -30,11 +35,11 @@
   <!-- Header -->
   <header class="sticky-header">
     <div class="container">
-     <!-- Logo -->
-                <div class="logo animate-logo">
-                    <img src="assets/images/swisstools_logo.png" alt="Logo picture" class="logo-img">
-                    <a href="/" class="logo-text">SWISS<span class="highlight">Tools</span></a>
-                </div>
+      <!-- Logo -->
+      <div class="logo animate-logo">
+        <img src="assets/images/swisstools_logo.png" alt="Logo picture" class="logo-img">
+        <a href="/" class="logo-text">SWISS<span class="highlight">Tools</span></a>
+      </div>
       <div class="menu-toggle">
         <i class="fas fa-bars menu-icon"></i>
       </div>
@@ -112,6 +117,9 @@
         <li class="sidebar-item"><a href="/admin/add_product" data-ga-event="sidebar_nav" data-ga-value="add_product"><i
               class="fas fa-plus-circle"></i>
             Add Product</a></li>
+        <li class="sidebar-item"><a href="/admin/add_brand" data-ga-event="sidebar_nav" data-ga-value="add_brand"><i
+              class="fas fa-plus-square"></i>
+            Add Brand</a></li>
         <li class="sidebar-item"><a href="/admin/chat" data-ga-event="sidebar_nav" data-ga-value="chat"><i
               class="fas fa-comments"></i>
             Chat
@@ -375,16 +383,15 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-container">
+      <!-- Company Info -->
       <div class="footer-column animate-fade">
         <h3 class="footer-logo">SWISS<span class="highlight">Tools</span></h3>
-        <p>Your trusted partner in engineering & construction tools.</p>
+        <p>Your trusted partner in engineering &amp; construction tools.</p>
         <div class="footer-contact">
-          <p><i class="fas fa-map-marker-alt"></i>
-            5 Cherubim Road, Mile 3 Market, Port Harcourt.</p>
-          <p><i class="fas fa-phone-alt"></i>
-            +234 913 232 8654</p>
-          <p><i class="fas fa-envelope"></i>
-            support@swisstools.store</p>
+          <p><i class="fas fa-map-marker-alt"></i> No 5, Chief Tom Agbuji Street (Cherubim Road) Mile 3, Port Harcourt,
+            Nigeria.</p>
+          <p><i class="fas fa-phone-alt"></i> +234 913 232 8654</p>
+          <p><i class="fas fa-envelope"></i> support@swisstools.store</p>
         </div>
       </div>
       <div class="footer-column animate-fade">
