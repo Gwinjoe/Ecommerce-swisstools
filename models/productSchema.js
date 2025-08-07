@@ -24,6 +24,7 @@ const productSchema = mongoose.Schema({
   },
   ratings: {
     type: mongoose.Types.Decimal128,
+    default: 4.5,
   },
   stock: {
     type: Number,

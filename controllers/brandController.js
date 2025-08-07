@@ -1,4 +1,5 @@
-const Brands = require("../models/brandSchema");
+const Brand = require("../models/brandSchema");
+const Brands = Brand;
 
 exports.getBrands = async (req, res) => {
   try {
@@ -44,7 +45,7 @@ exports.add_brand = async (req, res) => {
       description,
     })
 
-    const result = await newOrder.save();
+    const result = await newBrand.save();
     res.status(201).json({ success: true, message: "Brand created successfuly", result });
   } catch (error) {
     console.log(error)

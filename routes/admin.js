@@ -66,4 +66,18 @@ router.get("/chat", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "admin", "chat.html"));
 })
 
+router.get("/brands", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "admin", "brand.html"));
+})
+
+router.get("/add_brand", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "admin", "add_brand.html"))
+})
+router.get("/view_brand", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "admin", "view_brand.html"))
+})
+router.get("/edit_brand", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "admin", "edit_brand.html"))
+})
 module.exports = router;
+
